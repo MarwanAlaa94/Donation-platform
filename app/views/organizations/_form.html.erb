@@ -54,37 +54,12 @@
 
 
 
-    <%=f.label :image%><br>
+    <%=f.label "Profile Image"%><br>
     <%=f.file_field :image ,class: 'form-control'%>
 
-
     </div>
     </div>
-   <%#= f.check_box :terms_of_service  %> This form must be verified by the admin , wait for an email in 2 days
-
-
-<div class= "field">
-
-  <%= f.fields_for :org_images do |builder| %>
-
-    <% if builder.object.new_record? %>
-
-      <p>
-      <%= builder.label :caption, "Image Caption" %>
-      <%= builder.text_field :caption %>
-      </p>
-
-      <p>
-      <%= builder.label :photo, "Image File" %>
-      <%= builder.file_field :photo %>
-      </p>
-
-    <% end %>
-
-  <% end %>
-
-</div>
-
+   <%#= f.check_box :terms_of_service  %>
 
   <div class="submit">
     <%= f.submit "Done", class: "btn btn-primary" %>

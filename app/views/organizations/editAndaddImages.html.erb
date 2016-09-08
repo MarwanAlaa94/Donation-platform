@@ -11,7 +11,8 @@
     </div>
   <% end %>
 
-    <div class="field">
+  <div class="row">
+    <div class="col-md-6 col-md-offset-3">
     <h1>Edit images</h1>
     <% counter=0 %>
     <%= f.fields_for :org_images do |builder| %>
@@ -20,23 +21,24 @@
           <%image =@organization.org_images[counter]%>
           <%= image_tag  image.photo.url(:medium)%>
           <%= builder.label :caption, "Edit Image #{counter+1}" %>
-          <%= builder.text_field :caption %>
+          <%= builder.text_field :caption ,class: 'form-control'%>
           <%= builder.label :photo, "Edit Image File #{counter+1} " %>
-          <%= builder.file_field :photo %>
+          <%= builder.file_field :photo ,class: 'form-control'%>
         </p>
         <% else %>
         <p>
           <%= builder.label :caption, "New Image Caption" %>
-          <%= builder.text_field :caption %>
+          <%= builder.text_field :caption,class: 'form-control' %>
           <%= builder.label :photo, "New Image File" %>
-          <%= builder.file_field :photo %>
+          <%= builder.file_field :photo,class: 'form-control' %>
         </p>
         <% end %>
         <% counter=counter+1 %>
     <% end %>
   </div>
+  </div>
 
-  <div class="actions">
-    <%= f.submit %>
+  <div class="submit">
+    <%= f.submit "Update Images", class: "btn btn-primary" %>
   </div>
 <% end %>
