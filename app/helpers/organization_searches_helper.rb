@@ -1,0 +1,2 @@
+module OrganizationSearchesHelper
+end

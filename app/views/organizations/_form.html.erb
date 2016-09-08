@@ -1,0 +1,93 @@
+<%= form_for organization , html: { multipart: true } do |f| %>
+  <% if organization.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(organization.errors.count, "error") %> prohibited this organization from being saved:</h2>
+
+      <ul>
+      <% organization.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="row">
+    <div class="col-md-6 col-md-offset-3">
+
+    <%= f.label :org_name %>
+    <%= f.text_field :org_name , :autocomplete => 'off',class: 'form-control'  %>
+
+
+
+    <%= f.label :email %>
+    <%= f.email_field :email , :autocomplete => 'off',class: 'form-control' %>
+
+
+
+      <%= f.label :password %>
+        <%= f.password_field :password , :autocomplete => 'off',class: 'form-control' %>
+
+
+
+      <%= f.label :password_confirmation %>
+        <%= f.password_field :password_confirmation , :autocomplete => 'off',class: 'form-control'%>
+
+
+
+    <%= f.label :info %>
+    <%= f.text_area :info , :autocomplete => 'off',class: 'form-control'%>
+
+
+
+    <%= f.label :website_URL %>
+    <%= f.text_field :website_URL , :autocomplete => 'off',class: 'form-control' %>
+
+
+
+    <%= f.label :contacts %>
+    <%= f.text_field :contacts , :autocomplete => 'off',class: 'form-control' %>
+
+
+
+    <%= f.label :logo_url %>
+    <%= f.text_field :logo_url,class: 'form-control' %>
+
+
+
+    <%=f.label :image%><br>
+    <%=f.file_field :image ,class: 'form-control'%>
+
+
+    </div>
+    </div>
+   <%#= f.check_box :terms_of_service  %> This form must be verified by the admin , wait for an email in 2 days
+
+
+<div class= "field">
+
+  <%= f.fields_for :org_images do |builder| %>
+
+    <% if builder.object.new_record? %>
+
+      <p>
+      <%= builder.label :caption, "Image Caption" %>
+      <%= builder.text_field :caption %>
+      </p>
+
+      <p>
+      <%= builder.label :photo, "Image File" %>
+      <%= builder.file_field :photo %>
+      </p>
+
+    <% end %>
+
+  <% end %>
+
+</div>
+
+
+  <div class="submit">
+    <%= f.submit "Done", class: "btn btn-primary" %>
+  </div>
+
+<% end %>

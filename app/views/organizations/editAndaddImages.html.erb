@@ -1,0 +1,42 @@
+<%= form_for @organization , html: { multipart: true } do |f| %>
+  <% if @organization.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@organization.errors.count, "error") %> prohibited this organization from being saved:</h2>
+
+      <ul>
+      <% @organization.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+    <div class="field">
+    <h1>Edit images</h1>
+    <% counter=0 %>
+    <%= f.fields_for :org_images do |builder| %>
+        <% if counter != @organization.org_images.count %>
+        <p>
+          <%image =@organization.org_images[counter]%>
+          <%= image_tag  image.photo.url(:medium)%>
+          <%= builder.label :caption, "Edit Image #{counter+1}" %>
+          <%= builder.text_field :caption %>
+          <%= builder.label :photo, "Edit Image File #{counter+1} " %>
+          <%= builder.file_field :photo %>
+        </p>
+        <% else %>
+        <p>
+          <%= builder.label :caption, "New Image Caption" %>
+          <%= builder.text_field :caption %>
+          <%= builder.label :photo, "New Image File" %>
+          <%= builder.file_field :photo %>
+        </p>
+        <% end %>
+        <% counter=counter+1 %>
+    <% end %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

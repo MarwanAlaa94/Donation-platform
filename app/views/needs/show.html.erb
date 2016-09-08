@@ -1,0 +1,53 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Title:</strong>
+  <%= @need.title %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @need.description %>
+</p>
+
+<p>
+  <strong>Start date:</strong>
+  <%= @need.start_date %>
+</p>
+
+<p>
+  <strong>End date:</strong>
+  <%= @need.end_date %>
+</p>
+
+<p>
+  <strong>In progress:</strong>
+  <%= @need.in_progress %>
+</p>
+
+<p>
+  <strong>Money:</strong>
+  <%= @need.money %>
+</p>
+
+<p>
+  <strong>Urgent rate:</strong>
+  <%= @need.urgent_rate %>
+</p>
+
+<p>
+  <strong>Achievment flag:</strong>
+  <%= @need.achievment_flag %>
+</p>
+<%  if @need.need_images.present? %>
+<h4>List of Images</h4>
+<% @need.need_images.each do |image| %>
+  <p>
+    <%= image_tag  image.photo.url(:medium)%>
+  </p>
+<%end%>
+<% end %>
+
+
+<%= link_to 'Edit', edit_organization_need_path(@need) %> |
+<%= link_to 'Back', organization_needs_path %>

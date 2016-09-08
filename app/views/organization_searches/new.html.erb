@@ -1,0 +1,33 @@
+<h1> Advanced Search </h1>
+<%= form_for @organization_search do |f| %>
+	<div class="field">
+    	<%= f.label :org_name %>
+    	<%= f.text_field :org_name %>
+  	</div>
+
+  	<div class="field">
+    	<%= f.label :email %>
+    	<%= f.email_field :email %>
+  	</div>
+
+  	<div class="field">
+    	<%= f.label :info %>
+    	<%= f.text_area :info %>
+  	</div>
+
+  	<div class="field">
+    	<%= f.label :website_URL %>
+      <%= f.text_field :website_URL %>
+    </div>
+  
+
+  	<div class="field">
+    	<%= f.label :contacts %>
+      <%= f.text_field :contacts %>
+     </div>
+  
+    <div class="actions"><%= f.submit "Search for organizations " %> </div>
+
+<% end %>
+<p><%= link_to 'Back to Home Page' , organizations_path%></p> <!-- temporary 
+	

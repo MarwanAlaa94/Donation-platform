@@ -1,0 +1,37 @@
+<p><%= notice %></p>
+
+<h1>Needs</h1>
+
+
+    <% @needs.each do |need| %>
+        <%= link_to organization_need_path(params[:organization_id],need) do %>
+        <div class="homepage">
+          <p>
+          <strong>Title :</strong>
+          <%= need.title %>
+        </p>
+          <p>
+          <strong>Description:</strong>
+          <%= need.description %>
+        </p>
+
+        <p>
+          <strong>Start date:</strong>
+          <%= need.start_date %>
+        </p>
+        <p>
+          <strong>Money:</strong>
+          <%= need.money %>
+        </p>
+
+        <p>
+          <strong>Urgent rate:</strong>
+          <%= need.urgent_rate %>
+
+          </p>
+      </div>
+    <% end %>
+    <% end %>
+      <p><%= link_to 'back',organization_path(params[:organization_id]) %></p>
+
+<br>

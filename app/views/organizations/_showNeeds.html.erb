@@ -1,0 +1,30 @@
+<p id="notice"><%= notice %></p>
+
+<%= link_to organization_need_path(params[:id],need) do %>
+  <div class="homepage">
+    <p>
+    <strong>Title :</strong>
+    <%= need.title %>
+  </p>
+    <p>
+    <strong>Description:</strong>
+    <%= need.description %>
+  </p>
+
+  <p>
+    <strong>Start date:</strong>
+    <%= need.start_date %>
+  </p>
+  <p>
+    <strong>Money:</strong>
+    <%= need.money %>
+  </p>
+
+  <p>
+    <strong>Urgent rate:</strong>
+    <%= need.urgent_rate %>
+  </p>
+
+
+  </div>
+<% end %>

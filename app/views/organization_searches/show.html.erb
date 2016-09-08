@@ -1,0 +1,21 @@
+<h1> Search Results </h1>
+
+<% if @organization_search.search_organizations.empty? %>
+	<p> No Records Found </p>
+<% else %>
+	<% @organization_search.search_organizations.each do |org| %>
+		<br>
+		<div class "div">
+			<p><%= org.org_name %></p>
+			<p><%= org.email %></p>
+			<p><%= org.contacts %></p>
+			<p><%= org.info %></p>
+			<p><%= org.website_URL %></p>
+		</div>
+	<% end %>
+
+<% end %>
+<p><%= link_to 'Back to Search' , new_organization_search_path %></p>
+<p><%= link_to 'Back to Home Page' , organizations_path%></p>   <!-- temporary 
+
+

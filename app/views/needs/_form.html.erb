@@ -1,0 +1,78 @@
+<%= form_for ([need.organization, need]) , html: { multipart: true } do |f| %>
+
+  <% if need.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(need.errors.count, "error") %> prohibited this need from being saved:</h2>
+
+      <ul>
+      <% need.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class="row">
+  	<div class="col-md-6 col-md-offset-3">
+
+
+    <%= f.label :title %>
+    <%= f.text_field :title ,class: 'form-control'%>
+
+    <%= f.label :description %>
+    <%= f.text_area :description ,class: 'form-control'%>
+
+    <%= f.label :start_date %>
+    <%= f.date_select :start_date ,class: 'form-control'%>
+
+
+    <%= f.label :end_date %>
+    <%= f.date_select :end_date ,class: 'form-control'%>
+
+    <%= f.label :money %>
+    <%= f.text_field :money,class: 'form-control' %>
+    <br>
+    <%= f.label :urgent_rate %>
+    <%= f.number_field :urgent_rate ,class: 'form-control'  %>
+
+    <h5 style="display:inline-block;"><%= f.label :in_progress %> </h5>
+    <h5 style="display:inline-block;">
+    <%= f.check_box :in_progress, :style => "width: 110px; height: 50px;" %>
+    </h5>
+
+    <h5 style="display:inline-block;"><%= f.label :achievment_flag %> </h5>
+    <h5 style="display:inline-block;">
+    <%= f.check_box :achievment_flag, :style => "width: 50px; height: 50px;" %>
+    </h5>
+
+
+    <% counter=0 %>
+    <%= f.fields_for :need_images do |builder| %>
+        <% if counter != need.need_images.count %>
+        <p>
+          <%image =need.need_images[counter]%>
+          <%= image_tag  image.photo.url(:medium)%>
+          <%= builder.label :caption, "Edit Image #{counter+1}" %>
+          <%= builder.text_field :caption ,class: 'form-control'%>
+          <%= builder.label :photo, "Edit Image File #{counter+1} " %>
+          <%= builder.file_field :photo ,class: 'form-control' %>
+        </p>
+        <% else %>
+        <p>
+          <%= builder.label :caption, "New Image Caption" %>
+          <%= builder.text_field :caption,class: 'form-control' %>
+          <%= builder.label :photo, "New Image File" %>
+          <%= builder.file_field :photo,class: 'form-control' %>
+        </p>
+        <% end %>
+        <% counter=counter+1 %>
+    <% end %>
+
+
+
+  </div>
+</div>
+<div class="submit">
+  <%= f.submit "Done", class: "btn btn-primary" %>
+</div>
+
+<% end %>

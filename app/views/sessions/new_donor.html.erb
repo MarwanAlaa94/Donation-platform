@@ -1,0 +1,36 @@
+<% provide(:title, "Donor Sign in") %>
+<h1>Donor SignIn</h1>
+
+<% flash.each do |key, value| %>
+    <%= content_tag(:div, value, class: "alert alert-#{key}") %>
+<% end %>
+
+<div class="row">
+	<div class="col-md-6 col-md-offset-3">
+		<%= form_for(:session, url: donor_login_path) do |f| %>
+		
+				<%= f.label :email , :required => true%>
+				<%= f.email_field :email, class: 'form-control' %>
+
+				<%= f.label :password , :required => true%>
+				<%= f.password_field :password, class: 'form-control' %>
+
+				<%= f.submit "Sign In", class: "btn btn-primary" %>
+		<% end %>
+		
+
+		
+		  <% if !current_user %>
+		    
+		  	<p style="text-align:center;">New Donor? <%= link_to "Sign up !", donor_register_path %></p>
+		    <div id="user-widget">
+		    <a href="/auth/facebook" style = "margin-left:33%;color:white;" class="btn btn-facebook">
+								<i class="fa fa-facebook"></i> |
+								Sign in with Facebook
+							</a>
+			</div>
+
+		  <% end %>
+		
+	</div>
+</div>

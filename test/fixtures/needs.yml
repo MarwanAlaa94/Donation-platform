@@ -1,0 +1,21 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  title: MyString
+  description: MyString
+  start_date: MyString
+  end_date: MyString
+  in_progress: 
+  money: 1.5
+  urgent_rate: 1
+  achievment_flag: 
+
+two:
+  title: MyString
+  description: MyString
+  start_date: MyString
+  end_date: MyString
+  in_progress: 
+  money: 1.5
+  urgent_rate: 1
+  achievment_flag: 
