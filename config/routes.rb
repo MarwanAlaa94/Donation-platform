@@ -7,6 +7,7 @@ resources :organizations do
     get    'notApproved' => 'organizations#notApproved' , as: 'notApproved'
     get    'showNotApproved/:id' => 'organizations#showNotApproved' , as: 'showNotApproved'
     post    'approveOrg/:id' => 'organizations#approveOrg' , as: 'approveOrg'
+    delete  'disapproveOrg/:id' => 'organizations#disapproveOrg' , as: 'disapproveOrg'
   end
 end
 

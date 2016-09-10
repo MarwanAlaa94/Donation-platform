@@ -48,7 +48,7 @@
 </div>
 
 <div style="width:25%;" class="col-md-6 col-md-offset-6">
- <%= button_to 'Delete', @organization, method: :delete, data: { confirm: 'Are you sure?' } , class: "btn btn-primary" %>
+ <%= button_to 'DisApprove', organizations_path+"/disapproveOrg/"+@organization.id.to_s , method: :delete, data: { confirm: 'Are you sure?' } , class: "btn btn-primary" %>
 </div>
 </div>
 

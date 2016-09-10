@@ -22,6 +22,7 @@ class OrganizationsController < ApplicationController
     @organization.isApproved = true
     respond_to do |format|
       if @organization.save
+        @organization.send_admin_approve_mail
         # wait approve from admin # session[:organization_id]=@organization.id
         
         format.html { redirect_to admin_home_path, notice: 'Organization is approved successfully.' }
@@ -34,6 +35,16 @@ class OrganizationsController < ApplicationController
     end
 
   end
+  def disapproveOrg
+    @organization = Organization.find(params[:id])
+    @organization.send_admin_disapprove_mail
+    @organization.destroy
+    respond_to do |format|
+      format.html { redirect_to organizations_url, notice: 'Organization was successfully destroyed.' }
+      format.json { head :no_content }
+    end
+  end
+
 
   # GET /organizations/1
   # GET /organizations/1.json

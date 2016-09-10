@@ -24,7 +24,12 @@ validates :email,presence: true , uniqueness:{ case_sensetive: false }, format: 
     	end
 
     end
-
+    def send_admin_approve_mail
+        OrganizationMailer.approve_email(self).deliver
+    end
+    def send_admin_disapprove_mail
+        OrganizationMailer.disapprove_email(self).deliver
+    end
 
 
 end
