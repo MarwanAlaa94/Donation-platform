@@ -30,7 +30,7 @@ class UsersController < ApplicationController
       if @user.save
         session[:user_id]=@user.id
         # Tell the UserMailer to send a welcome Email after save
-        UserMailer.welcome_email(@user).deliver
+        @user.send_admin_mail
         format.html { redirect_to @user, notice: 'Donor was successfully created.' }
         format.json { render :show, status: :created, location: @user }
       else

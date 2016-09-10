@@ -54,22 +54,23 @@ Rails.application.configure do
 
 
 
-config.action_mailer.raise_delivery_errors = true
-  config.action_mailer.perform_deliveries = true
 
-  config.action_mailer.default_url_options = { :host => 'localhost:3000' }
-
+config.action_mailer.default_url_options = {:host => 'localhost:3000'} 
   config.action_mailer.delivery_method = :smtp
+  config.action_mailer.perform_deliveries = true 
+  config.action_mailer.raise_delivery_errors = true # it will show error while delivering the mail. 
+  generally people keep it false in production environment
+  config.action_mailer.default :charset => "utf-8"
+
   config.action_mailer.smtp_settings = {
-    :address => "smtp.gmail.com",
-    :port => "587",
-    :domain               => "gmail.com",
-    :user_name            => "DonationPlatformWebsite@gmail.com",
-    :password             => "donation123",
-    :authentication => "plain",
-    :enable_starttls_auto => true
-  } 
-
-
+    address: "smtp.gmail.com",
+    port: 587,
+    domain: "localhost:3000",
+    authentication: "login",
+    enable_starttls_auto: true,
+    user_name: "ahmed.elsayed.mahmoud3@gmail.com", # this should be a real gmail id
+    password: "josh0147JOSH" # this should be real password of your gmail id
+    :openssl_verify_mode => 'none'
+  }
   
 end

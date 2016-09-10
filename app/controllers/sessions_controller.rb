@@ -52,7 +52,7 @@ class SessionsController < ApplicationController
 
 	def create
 		organization = Organization.find_by(email: params[:session][:email].downcase)
-		if organization && organization.authenticate(params[:session][:password])
+		if organization && organization.authenticate(params[:session][:password]) && organization.isApproved == true
 			log_in organization
 			redirect_to organization
 		# Log the user in and redirect to the user's show page.
