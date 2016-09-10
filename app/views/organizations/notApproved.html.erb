@@ -1,0 +1,43 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Organizations</h1>
+
+    <ul class="users">
+   
+    
+    <% @organizations.each do |organization| %>
+      <li>
+        <h4>
+        	<strong>Name:</strong>
+        	<%= organization.org_name %>
+        </h4>
+
+        <h4>
+        	<strong>Website:</strong>
+        	<%= organization.website_URL%>
+        </h4>
+
+        <h4>  
+	        <strong>Email:</strong>	
+	        <%= organization.email %>
+	      </h4>
+
+	      <h4>  
+	        <strong>Info:</strong>
+	        <br>
+	        <%= truncate(organization.info, :length => 150) %>
+	      </h4>
+
+        <br>
+        
+        <h5>
+          <%= link_to 'Show   ', organizations_path+"/showNotApproved/"+organization.id.to_s %> |
+          <%= link_to 'Delete', organization, method: :delete, data: { confirm: 'Are you sure?' } %>
+        </h5>
+      </li>
+    <% end %>
+  </ul>
+
+    <%#= will_paginate %>
+
+<br>

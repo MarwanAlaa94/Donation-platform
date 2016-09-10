@@ -1,0 +1,54 @@
+ <p id="notice"><%= notice %></p>
+<div class="row">
+  
+    <section class="user_info">
+
+      <h3>  
+        <strong>Org name: </strong>
+        <br>
+        <%= @organization.org_name %>
+      </h3>
+
+      <%= image_tag @organization.image.url(:medium)%>
+      
+      <h3>  
+        <strong>Email:</strong>
+        <br>
+        <%= @organization.email %>
+      </h3>
+
+      <h3>  
+        <strong>Info:</strong>
+        <br>
+        <%= @organization.info %>
+      </h3>
+      
+      <h3>
+        <strong>Website url:</strong>
+        <br>
+        <%= @organization.website_URL %>
+      </h3>
+
+      <h3>
+        <strong>Contacts:</strong>
+        <br>
+        <%= @organization.contacts %>
+      </h3>
+
+      <h3>
+        <strong>Logo url:</strong>
+        <br>
+        <%= @organization.logo_url %>
+      </h3>
+
+    </section>
+    <br/>
+ <div style="margin-left:0px;width:25%;" class="col-md-6 col-md-offset-3">
+ <%= button_to 'Approve', organizations_path+"/approveOrg/"+@organization.id.to_s, method: :post, class: "btn btn-primary" %>
+</div>
+
+<div style="width:25%;" class="col-md-6 col-md-offset-6">
+ <%= button_to 'Delete', @organization, method: :delete, data: { confirm: 'Are you sure?' } , class: "btn btn-primary" %>
+</div>
+</div>
+

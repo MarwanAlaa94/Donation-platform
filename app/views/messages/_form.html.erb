@@ -1,0 +1,37 @@
+<%= form_for(message) do |f| %>
+  <% if message.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(message.errors.count, "error") %> prohibited this message from being saved:</h2>
+
+      <ul>
+      <% message.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    
+    
+        <%= f.label :name , :required => true%>
+        <%= f.text_field :name, :required => true, class: 'form-control' %>
+
+        <%= f.label :email , :required => true%>
+        <%= f.email_field :email, :required => true, class: 'form-control' %>
+
+        <%= f.label :subject%>
+        <%= f.text_field :subject, class: 'form-control' %>
+
+      
+        <%= f.label :contect %>
+        <%= f.text_area :contect , :required => true, class: 'form-control'%>
+
+        <%= f.submit "Send Message", class: "btn btn-primary" %>
+      
+  </div>
+</div>
+
+
+<% end %>
+

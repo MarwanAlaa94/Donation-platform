@@ -1,5 +1,16 @@
 Rails.application.routes.draw do
 
+  get 'admin/home'
+
+resources :organizations do
+  collection do
+    get    'notApproved' => 'organizations#notApproved' , as: 'notApproved'
+    get    'showNotApproved/:id' => 'organizations#showNotApproved' , as: 'showNotApproved'
+    post    'approveOrg/:id' => 'organizations#approveOrg' , as: 'approveOrg'
+  end
+end
+
+  resources :messages
   resources :organizations do
     resources :needs
     get 'Achievements' => 'needs#indexAchivements'
@@ -18,9 +29,12 @@ Rails.application.routes.draw do
   get    '/donor/login',   to: 'sessions#new_donor'
   post   '/donor/login',   to: 'sessions#create_donor'
   delete '/donor/logout',  to: 'sessions#destroy_donor'
-
-  match '/contacts',     to: 'contacts#new', via: 'get'
-  resources "contacts", only: [:new, :create]
+  get    '/admin/login',   to: 'sessions#new_admin'
+  get    '/admin/',   to: 'sessions#new_admin'
+  post   '/admin/login',   to: 'sessions#create_admin'
+  delete '/admin/logout',  to: 'sessions#destroy_admin'
+  
+  post   '/admin/home/message/reply',   to: 'admin#reply'
   get 'auth/:provider/callback' => 'sessions#create_donor_provider'
   get 'auth/failure' => redirect('/')
 

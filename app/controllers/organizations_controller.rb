@@ -5,7 +5,34 @@ class OrganizationsController < ApplicationController
   # GET /organizations.json
   def index
     organizations_all = Organization.search(params[:search])
-    @organizations = organizations_all.paginate(page: params[:page],:per_page=> 20)
+    @organizations = organizations_all.where(isApproved: true).paginate(page: params[:page],:per_page=> 20)
+  end
+
+  def notApproved
+    organizations_all = Organization.search(params[:search])
+    @organizations = organizations_all.where(isApproved: false).paginate(page: params[:page],:per_page=> 20)
+  end
+
+  def showNotApproved
+    @organization = Organization.find(params[:id])
+  end
+
+  def approveOrg
+    @organization = Organization.find(params[:id])
+    @organization.isApproved = true
+    respond_to do |format|
+      if @organization.save
+        # wait approve from admin # session[:organization_id]=@organization.id
+        
+        format.html { redirect_to admin_home_path, notice: 'Organization is approved successfully.' }
+        #format.json { render :show, status: :created, location: @organization }
+
+      else
+        format.html { render :new }
+        format.json { render json: @organization.errors, status: :unprocessable_entity }
+      end
+    end
+
   end
 
   # GET /organizations/1
@@ -32,12 +59,14 @@ class OrganizationsController < ApplicationController
   # POST /organizations.json
   def create
     @organization = Organization.new(organization_params)
-
+    
+    @organization.isApproved = false
     respond_to do |format|
       if @organization.save
-        session[:organization_id]=@organization.id
-        format.html { redirect_to @organization, notice: 'Organization was successfully created.' }
-        format.json { render :show, status: :created, location: @organization }
+        # wait approve from admin # session[:organization_id]=@organization.id
+        
+        format.html { redirect_to root_path, notice: 'Waiting for admin approvement. We will contact you soon.' }
+        #format.json { render :show, status: :created, location: @organization }
 
       else
         format.html { render :new }
@@ -79,5 +108,5 @@ class OrganizationsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def organization_params
-        params.require(:organization).permit(:org_name, :email, :password, :info, :website_URL, :contacts, :logo_url , :password_confirmation,:image,org_images_attributes:[:caption,:photo,:id])   end
+        params.require(:organization).permit(:org_name, :email, :password, :info, :website_URL, :contacts, :logo_url , :password_confirmation,:image, :isApproved, org_images_attributes:[:caption,:photo,:id] )   end
         end

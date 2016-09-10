@@ -1,0 +1,46 @@
+<p id="notice"><%= notice %></p>
+
+<h3>Message</h3>
+<p>
+  <strong>Name:</strong>
+  <%= @message.name %>
+</p>
+
+<p>
+  <strong>Email:</strong>
+  <%= @message.email %>
+</p>
+
+<p>
+  <strong>Subject:</strong>
+  <%= @message.subject %>
+</p>
+
+<p>
+  <strong>Contect:</strong>
+  <%= @message.contect %>
+</p>
+
+
+<h3>Reply by sending email</h3>
+<%= form_for admin_home_message_reply_path do %>
+  
+<div class="row">
+  <div class="col-md-6 ">
+    
+    
+        <%= text_area_tag 'body', '', class: 'form-control'%>
+        <div style="margin-left:0px;width:25%;" class="col-md-6">
+		 <%= button_to 'Reply', admin_home_message_reply_path, method: :post, class: "btn btn-primary" %>
+		</div>
+      
+  </div>
+</div>
+
+
+<% end %>
+
+
+<br />
+
+<%= link_to 'Back', messages_path %>

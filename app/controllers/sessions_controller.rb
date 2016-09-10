@@ -23,12 +23,30 @@ class SessionsController < ApplicationController
 	    redirect_to root_url
 	  end
 
+	 def create_admin
+	 	if "admin" == params[:session][:email].downcase && "admin" == params[:session][:password]
+		#user = User.find_by(email: params[:session][:email].downcase)
+		#if user && user.authenticate(params[:session][:password])
+			admin_log_in 
+			redirect_to admin_home_path
+		# Log the user in and redirect to the user's show page.
+		else
+			flash.now[:danger] = 'Invalid Email or Password !'
+			render 'new_admin'
+		end
+	end
+
 	def show_donor
  		@user = User.find(params[:id])
  	end
 
  	def destroy_donor
  		donor_log_out
+		redirect_to root_url
+ 	end
+
+ 	def destroy_admin
+ 		admin_log_out
 		redirect_to root_url
  	end
 

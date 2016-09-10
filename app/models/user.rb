@@ -19,7 +19,7 @@ class User < ApplicationRecord
       #user.oauth_expires_at = Time.at(auth.credentials.expires_at)
       
       if auth.info.email == nil
-      	user.email = "user@example.com"
+      	user.email = "HtmL5"
       else
       	user.email = auth.info.email
       end

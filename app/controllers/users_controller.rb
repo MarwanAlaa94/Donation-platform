@@ -4,7 +4,7 @@ class UsersController < ApplicationController
   # GET /users
   # GET /users.json
   def index
-    
+    @users = User.all
   end
 
   # GET /users/1
@@ -29,6 +29,8 @@ class UsersController < ApplicationController
     respond_to do |format|
       if @user.save
         session[:user_id]=@user.id
+        # Tell the UserMailer to send a welcome Email after save
+        UserMailer.welcome_email(@user).deliver
         format.html { redirect_to @user, notice: 'Donor was successfully created.' }
         format.json { render :show, status: :created, location: @user }
       else

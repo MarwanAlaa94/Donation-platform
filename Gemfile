@@ -20,7 +20,9 @@ gem 'pry-nav'
 gem 'omniauth'
 gem 'omniauth-facebook', '1.4.0'
 gem 'mail_form'
+
 gem 'simple_form'
+
 #gem 'valid_url'
 
 group :development, :test do

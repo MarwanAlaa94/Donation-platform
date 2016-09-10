@@ -24,8 +24,8 @@
                info: info,
                website_URL: website_URL,
                contacts: contacts,
-               logo_url: logo_url
-
+               logo_url: logo_url,
+               isApproved: isApproved
 
                  )
 5.times do |n|
