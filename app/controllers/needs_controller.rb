@@ -20,9 +20,13 @@ class NeedsController < ApplicationController
 
   def create
     @organization = Organization.find(params[:organization_id])
-    @need = @organization.needs.create!(need_params)
-    redirect_to organization_path(@organization)
+    @need = @organization.needs.create(need_params)
+      if @organization.save
+          redirect_to organization_path(@organization)
+        else
+         render :new 
   end
+end
 
 
   def update
