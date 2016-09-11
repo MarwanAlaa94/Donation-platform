@@ -1,12 +1,20 @@
 class User < ApplicationRecord
   has_and_belongs_to_many :needs
+    
+  mount_uploader :avatar, AvatarUploader
 
-  	has_secure_password
-  	validates :user_name, presence: true, uniqueness:{ case_sensetive: false }, length: {in: 3..40}
+
+  has_secure_password
+  validates :user_name, presence: true, uniqueness:{ case_sensetive: false }, length: {in: 3..40}
 	validates :password, presence: true, length: {minimmum: 10, maximum:40},confirmation: {case_sensitive: false }
 
-  	VALID_EMAIL_REGEX= /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
+  VALID_EMAIL_REGEX= /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
 	validates :email,presence: true , uniqueness:{ case_sensetive: false }, format: { with: VALID_EMAIL_REGEX}
+
+   # User Avatar Validation
+  validates_presence_of   :avatar
+  validates_integrity_of  :avatar
+  validates_processing_of :avatar
 
 	def self.from_omniauth(auth)
     	where(auth.slice(:user_name)).first_or_initialize.tap do |user|
@@ -31,4 +39,9 @@ class User < ApplicationRecord
     UserMailer.welcome_email(self).deliver
   end
 
+ 
+  private
+    def avatar_size_validation
+      errors[:avatar] << "should be less than 500KB" if avatar.size > 0.5.megabytes
+    end
 end

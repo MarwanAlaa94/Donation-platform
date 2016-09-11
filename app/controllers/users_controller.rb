@@ -27,6 +27,7 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
 
     respond_to do |format|
+      puts(user_params)
       if @user.save
         @user.send_admin_mail
         session[:user_id]=@user.id
@@ -80,6 +81,6 @@ class UsersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
-      params.require(:user).permit(:user_name, :email, :password, :password_confirmation)
+      params.require(:user).permit(:user_name, :email, :password, :password_confirmation, :avatar, :avatar_cache, :remove_avatar)
     end
 end
