@@ -36,8 +36,11 @@
 </p>
 
 <p>
-  <strong>Achievment flag:</strong>
-  <%= @need.achievment_flag %>
+  <% if @need.in_progress==true %>
+  <strong style="color:blue;">"In Progress"</strong>
+  <% else %>
+  <strong style="color:green;">"Done"</strong>
+  <%end%>
 </p>
 <%  if @need.need_images.present? %>
 <h4>List of Images</h4>
