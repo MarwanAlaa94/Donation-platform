@@ -35,7 +35,7 @@ end
   post   '/admin/login',   to: 'sessions#create_admin'
   delete '/admin/logout',  to: 'sessions#destroy_admin'
   
-  post   '/admin/home/message/reply',   to: 'admin#reply'
+  post   '/messages/:id/',   to: 'messages#adminReply'
   get 'auth/:provider/callback' => 'sessions#create_donor_provider'
   get 'auth/failure' => redirect('/')
 
