@@ -8,6 +8,10 @@ module SessionsHelper
 		@current_organization = @current_organization || Organization.find_by(id: session[:organization_id])
 	end
 
+	def current_organization?(organization)
+    organization == current_organization
+  end
+
 	def logged_in?
 		!current_organization.nil?
 	end
@@ -39,6 +43,8 @@ module SessionsHelper
 		session[:admin] = "admin"
 		@current_admin = "admin"
 	end
+
+
 
 	def current_admin
 		@current_admin = @current_user || session[:admin]
