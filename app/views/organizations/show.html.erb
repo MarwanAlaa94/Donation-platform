@@ -44,13 +44,10 @@
 <%end%>
 <% end %>
 
-<h1><%= link_to 'AddImages',editImages_path(@organization) %></h1>
-
-
 
 <h1><%= link_to 'Needs',organization_needs_path(@organization) %></h1>
-
 <h1><%= link_to 'Achievements',organization_Achievements_path(@organization) %></h1>
+<% if current_organization?(@organization)%>
 <h1><%= link_to 'Add Need',new_organization_need_path(@organization) %></h1>
-<%= link_to 'Edit', edit_organization_path(@organization) %> |
-<%= link_to 'Back', organizations_path %>
+<h1><%= link_to 'AddImages',editImages_path(@organization) %></h1>
+<% end %>

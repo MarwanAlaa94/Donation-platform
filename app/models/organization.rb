@@ -13,7 +13,7 @@ class Organization < ApplicationRecord
 		VALID_EMAIL_REGEX= /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
 		validates :email,presence: true , uniqueness:{ case_sensetive: false }, format: { with: VALID_EMAIL_REGEX}
 
-	has_attached_file :image, styles: {large:"600x600>" ,medium: "300x300>", thumb: "100x100#" }
+		has_attached_file :image, styles: {small:"50x70>" ,medium: "300x300>", thumb: "100x100#" }
     validates_attachment_content_type :image, content_type: /\Aimage\/.*\z/
 
     def self.search(search)

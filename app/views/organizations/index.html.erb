@@ -8,24 +8,23 @@
         <%= submit_tag "Search in organizations names" %>
     <% end %>
     <%= link_to "Advanced Search" ,  new_organization_search_path %>
-    
+
     <%= will_paginate %>
     <% @organizations.each do |organization| %>
-      <li>
+    <% if !current_organization?(organization)%>
+    <li>
+      <%= link_to organization do %>
+
+      <div class="organization_temp">
+        <h3><%= image_tag   organization.image.url(:thumb)%></h3>
         <h4><strong>Name:</strong</h4>
         <strong> <%= organization.org_name %></strong>
         <h4><strong>Website:</strong</h4>
         <strong>  <%= organization.website_URL%></strong>
-
-        <br>
-        <br>
-        
-        <h5>
-          <%= link_to 'Show   ', organization %>
-          <%= link_to 'Edit', edit_organization_path(organization) %>
-          <%= link_to 'Destroy', organization, method: :delete, data: { confirm: 'Are you sure?' } %>
-        </h5>
+      </div>
+      <%end%>
       </li>
+      <%end%>
     <% end %>
   </ul>
 
