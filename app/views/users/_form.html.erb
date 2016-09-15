@@ -27,8 +27,27 @@
         <%= f.password_field :password_confirmation , :autocomplete => 'off', class: 'form-control'%>
          
         <% if current_user %>
+          <% if current_user.avatar? %>
+            <%= image_tag(current_user.avatar.url) %>
+            <br />
+            
+            <%= f.label :remove_avatar  do %>
+                <label>Remove Image:<%= f.check_box :remove_avatar %></label>
+            <% end %>
+          <% end %>
+
+          <label>Upload Image:
+            <%= f.file_field :avatar, class: 'form-control' %>
+          </label>
+          <%= f.hidden_field :avatar_cache %>
           <%= f.submit 'Save' , class: "btn btn-primary" %>
         <% else %>
+          <div class="field">
+            <%= f.label :avatar do %>
+              <%= f.file_field :avatar , class: 'form-control'%>
+              <%= f.hidden_field :avatar_cache %>
+            <% end %>
+          </div>
           <%= f.submit 'Sign Up' , class: "btn btn-primary" %>
         <% end %>
         

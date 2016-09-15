@@ -21,18 +21,22 @@
   <%= @message.contect %>
 </p>
 
+<p>
+  <strong>Reply:</strong>
+  <%= @message.reply %>
+</p>
+
 
 <h3>Reply by sending email</h3>
-<%= form_for admin_home_message_reply_path do %>
+<%= form_for "/messages/"+@message.id.to_s do %>
   
 <div class="row">
   <div class="col-md-6 ">
     
-    
-        <%= text_area_tag 'body', '', class: 'form-control'%>
-        <div style="margin-left:0px;width:25%;" class="col-md-6">
-		 <%= button_to 'Reply', admin_home_message_reply_path, method: :post, class: "btn btn-primary" %>
-		</div>
+    <%= text_area_tag :reply,'', class: 'form-control'%>
+    <div style="margin-left:0px;width:25%;" class="col-md-6">
+     <%= button_to 'Reply', "/messages/"+@message.id.to_s, method: :post, class: "btn btn-primary" %>
+    </div>
       
   </div>
 </div>

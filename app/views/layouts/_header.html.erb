@@ -32,7 +32,7 @@
               </li>
             </ul>
             </li>
-          <% elsif logged_in? %>
+          <% elsif donor_logged_in? %>
 
               <li style="font-family: Lobster; font-size:20px;"> <%= link_to current_user.user_name, @current_user %></li>
 
@@ -41,9 +41,10 @@
                  <b class="caret"></b>
               </a>
               <ul class="dropdown-menu">
-
+                <li><a href="/messages/new">Contact Us</a></li>
+                <li class="divider"></li>
                 <li>
-                <%= link_to "Log out", logout_path, method: "delete" %>
+                <%= link_to "Log out", donor_logout_path, method: "delete" %>
                 </li>
               </ul>
               </li>

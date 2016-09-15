@@ -14,6 +14,15 @@
   <strong>Password:</strong>
   <%= @user.password %>
 </p>
+<% if @user.avatar? %>
+	<p>
+		<strong>Image:</strong><br />
+	  	<%= image_tag @user.avatar.url() %>
+	</p>
+<% end %>
 
-<%= link_to 'Edit', edit_user_path(@user) %> |
-<%= link_to 'Back', root_path %>
+<div class="row">
+  <div class="col-md-4"><%= button_to 'Edit Profile', edit_user_path(@user), method: :get, class: "btn btn-primary btn-block btn-responsive" %></div>
+
+</div>
+

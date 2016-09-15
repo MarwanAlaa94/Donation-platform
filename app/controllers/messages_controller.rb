@@ -21,6 +21,19 @@ class MessagesController < ApplicationController
   def edit
   end
 
+  def adminReply 
+    @message = Message.find(params[:id])
+    @message.send_admin_reply(params[:reply])
+    @message.reply = params[:reply]
+    respond_to do |format|
+      if @message.save
+        format.html { redirect_to admin_home_path, notice: 'Reply was successfully Sent.' }
+      else
+        format.html { redirect_to admin_home_path, notice: 'Error in saving reply.' }
+      end
+    end
+  end
+
   # POST /messages
   # POST /messages.json
   def create
@@ -70,6 +83,6 @@ class MessagesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def message_params
-      params.require(:message).permit(:name, :email, :subject, :contect)
+      params.require(:message).permit(:name, :email, :subject, :contect, :reply)
     end
 end
