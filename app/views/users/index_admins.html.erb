@@ -13,15 +13,13 @@
   </thead>
 
   <tbody>
-    <% @users.each do |user| %>
-      <% if user.isAdmin %>
+    <% @admins.each do |user| %>
       <tr>
         <td><%= truncate(user.user_name, :length => 100)  %></td>
         <td><%= truncate(user.email, :length => 100) %></td>
 
-        <td><%= link_to 'Show', user %> | <%= link_to 'Delete', user,method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Show', user %></td>
       </tr>
-      <% end %>
     <% end %>
   </tbody>
 </table>

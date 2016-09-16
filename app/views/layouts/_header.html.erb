@@ -43,6 +43,9 @@
               <ul class="dropdown-menu">
                 <li><a href="/messages/new">Contact Us</a></li>
                 <li class="divider"></li>
+                <li><%= link_to "Edit Profile", edit_user_path(current_user)%></li>
+                <li><%= link_to 'Delete Profile', current_user, method: :delete, data: { confirm: 'Are you sure?' } %></li>
+                <li class="divider"></li>
                 <li>
                 <%= link_to "Log out", donor_logout_path, method: "delete" %>
                 </li>
@@ -53,7 +56,7 @@
 
               <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                 <b class="caret"></b>
+                 Authorities<b class="caret"></b>
               </a>
               <ul class="dropdown-menu">
                 <li style="font-family: Lobster; font-size:20px;"> <%= link_to 'Messages', messages_path %></li>
@@ -62,13 +65,24 @@
                 <li style="font-family: Lobster; font-size:20px;"> <%= link_to 'All Donors', users_path %></li>
                 <li style="font-family: Lobster; font-size:20px;"> <%= link_to 'All Admins', users_admins_path %></li>
                 <li class="divider"></li>
-                <li> <%= link_to 'Add new Admin', admin_invite_path %></li>
+                <li style="font-family: Lobster; font-size:20px;"> <%= link_to 'Add new Admin', admin_invite_path %></li>
+              </ul>
+              </li>
+              <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                Settings <b class="caret"></b>
+              </a>
+              <ul class="dropdown-menu">
+                <li><%= link_to "Edit Profile", edit_user_path(current_admin)%></li>
+                <li><%= link_to 'Delete Profile', current_admin, method: :delete, data: { confirm: 'Are you sure?' } %></li>
                 <li class="divider"></li>
                 <li>
                 <%= link_to "Log out", admin_logout_path, method: "delete" %>
                 </li>
               </ul>
               </li>
+
+
 
 
           <% end %>

@@ -51,3 +51,6 @@
 <h1><%= link_to 'Add Need',new_organization_need_path(@organization) %></h1>
 <h1><%= link_to 'AddImages',editImages_path(@organization) %></h1>
 <% end %>
+<% if admin_logged_in?%>
+  <h1><%= link_to 'Delete Profile', @organization, method: :delete, data: { confirm: 'Are you sure?' } %></h1>
+<% end %>

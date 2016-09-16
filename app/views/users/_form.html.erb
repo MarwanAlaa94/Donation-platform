@@ -13,24 +13,24 @@
         </div>
       <% end %>
 
-      
+
         <%= f.label :user_name %>
         <%= f.text_field :user_name , class: 'form-control'%>
-      
+
         <%= f.label :email %>
         <%= f.email_field :email, class: 'form-control' %>
-      
+
         <%= f.label :password %>
         <%= f.password_field :password, :autocomplete => 'off', class: 'form-control' %>
-      
+
         <%= f.label :password_confirmation %>
         <%= f.password_field :password_confirmation , :autocomplete => 'off', class: 'form-control'%>
-         
+
         <% if current_user %>
           <% if current_user.avatar? %>
             <%= image_tag(current_user.avatar.url) %>
             <br />
-            
+
             <%= f.label :remove_avatar  do %>
                 <label>Remove Image:<%= f.check_box :remove_avatar %></label>
             <% end %>
@@ -50,9 +50,9 @@
               <%= f.hidden_field :avatar_cache %>
             <% end %>
           </div>
-          <%= f.submit 'Sign Up' , class: "btn btn-primary" %>
+          <%= f.submit 'Done' , class: "btn btn-primary" %>
         <% end %>
-        
+
     <% end %>
     <% if ! current_user %>
   <p style="text-align:center;">Have an account? <%= link_to "Sign in !", donor_login_path %></p>

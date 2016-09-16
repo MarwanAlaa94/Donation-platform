@@ -1,6 +1,8 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
-
+  before_action :correct_donor_or_admin, only: [:show, :destroy]
+  before_action :correct_donor, only: [ :edit, :update]
+  before_action :logged_in_admin, only:[:index,:index_admins]
   # GET /users
   # GET /users.json
   def index
@@ -8,7 +10,7 @@ class UsersController < ApplicationController
   end
 
   def index_admins
-    @users = User.all
+    @admins = User.where(isAdmin:true)
   end
   # GET /users/invite
   def invite_admin
@@ -87,6 +89,7 @@ class UsersController < ApplicationController
   # DELETE /users/1
   # DELETE /users/1.json
   def destroy
+    donor_log_out
     @user.destroy
     respond_to do |format|
       format.html { redirect_to users_url, notice: 'Donor was successfully deleted.' }
@@ -106,6 +109,22 @@ class UsersController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_user
       @user = User.find(params[:id])
+    end
+
+    def logged_in_admin
+        unless admin_logged_in?
+           redirect_to root_url
+        end
+    end
+
+    def correct_donor_or_admin
+        @user = User.find(params[:id])
+        redirect_to(root_url) if !current_user?(@user) && !admin_logged_in?
+    end
+
+    def correct_donor
+        @user = User.find(params[:id])
+        redirect_to(root_url) if !current_user?(@user)
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
