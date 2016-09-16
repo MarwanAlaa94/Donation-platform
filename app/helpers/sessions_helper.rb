@@ -30,6 +30,10 @@ module SessionsHelper
 		@current_user = @current_user || User.find_by(id: session[:user_id])
 	end
 
+	def current_user?(user)
+    user == current_user || user==current_admin
+  end
+
 	def donor_logged_in?
 		!current_user.nil?
 	end
@@ -48,6 +52,7 @@ module SessionsHelper
 	def current_admin
 		@current_admin = @current_admin || User.find_by(id: session[:admin_id])
 	end
+
 
 	def admin_logged_in?
 		!current_admin.nil?

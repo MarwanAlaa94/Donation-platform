@@ -1,6 +1,6 @@
 class MessagesController < ApplicationController
   before_action :set_message, only: [:show, :edit, :update, :destroy]
-
+  before_action :logged_in_admin,only: [:show, :edit, :update, :destroy,:index]
   # GET /messages
   # GET /messages.json
   def index
@@ -21,7 +21,7 @@ class MessagesController < ApplicationController
   def edit
   end
 
-  def adminReply 
+  def adminReply
     @message = Message.find(params[:id])
     @message.send_admin_reply(params[:reply])
     @message.reply = params[:reply]
@@ -43,7 +43,7 @@ class MessagesController < ApplicationController
       if @message.save
         format.html { redirect_to root_path, notice: 'Message was successfully Sent.' }
 
-       
+
       else
         format.html { render :new }
         format.json { render json: @message.errors, status: :unprocessable_entity }
@@ -85,4 +85,10 @@ class MessagesController < ApplicationController
     def message_params
       params.require(:message).permit(:name, :email, :subject, :contect, :reply)
     end
+
+    def logged_in_admin
+         unless admin_logged_in?
+           redirect_to root_url
+         end
+       end
 end

@@ -10,19 +10,15 @@
   <%= @user.email %>
 </p>
 
-<p>
-  <strong>Password:</strong>
-  <%= @user.password %>
-</p>
 <% if @user.avatar? %>
 	<p>
 		<strong>Image:</strong><br />
-	  	<%= image_tag @user.avatar.url() %>
+	  	<%= image_tag @user.avatar.url(:medium) %>
 	</p>
 <% end %>
+<% if admin_logged_in? && !@user.isAdmin%>
+  <h1><%= link_to 'Delete Profile', @user, method: :delete, data: { confirm: 'Are you sure?' } %></h1>
+<% end %>
 
-<div class="row">
-  <div class="col-md-4"><%= button_to 'Edit Profile', edit_user_path(@user), method: :get, class: "btn btn-primary btn-block btn-responsive" %></div>
 
 </div>
-

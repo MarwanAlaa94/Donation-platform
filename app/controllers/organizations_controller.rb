@@ -1,7 +1,8 @@
 class OrganizationsController < ApplicationController
   before_action :set_organization, only: [:show,:editAndaddImages ,:edit, :update, :destroy]
   before_action :logged_in_user, only: [:edit,:show, :update]
-  before_action :correct_user,   only: [:edit, :update,:destroy,:editAndaddImages]
+  before_action :correct_user,   only: [:edit, :update,:editAndaddImages]
+  before_action :correct_user_or_admin,   only: [:destroy]
   # GET /organizations
   # GET /organizations.json
   def index
@@ -125,11 +126,16 @@ class OrganizationsController < ApplicationController
         end
 
     def logged_in_user
-         unless logged_in?
+         unless logged_in? || admin_logged_in? || donor_logged_in?
            flash[:danger] = "Please log in."
            redirect_to login_url
          end
        end
+
+    def correct_user_or_admin
+        @organization = Organization.find(params[:id])
+        redirect_to(root_url) unless current_organization?(@organization) || admin_logged_in?
+    end
 
     def correct_user
         @organization = Organization.find(params[:id])
