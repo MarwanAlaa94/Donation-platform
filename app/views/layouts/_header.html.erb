@@ -49,17 +49,21 @@
               </ul>
               </li>
           <% elsif admin_logged_in? %>
-              <li style="font-family: Lobster; font-size:20px;"> <%= link_to 'Messages', messages_path %></li>
-              <li style="font-family: Lobster; font-size:20px;"> <%= link_to 'Not approved organizations', notApproved_organizations_path %></li>
-              <li style="font-family: Lobster; font-size:20px;"> <%= link_to 'All Organizations', organizations_path %></li>
-              <li style="font-family: Lobster; font-size:20px;"> <%= link_to 'All Donors', users_path %></li>
+              <li style="font-family: Lobster; font-size:20px;"> <%= link_to current_admin.user_name, @current_admin %></li>
 
               <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                  <b class="caret"></b>
               </a>
               <ul class="dropdown-menu">
-
+                <li style="font-family: Lobster; font-size:20px;"> <%= link_to 'Messages', messages_path %></li>
+                <li style="font-family: Lobster; font-size:20px;"> <%= link_to 'Not approved organizations', notApproved_organizations_path %></li>
+                <li style="font-family: Lobster; font-size:20px;"> <%= link_to 'All Organizations', organizations_path %></li>
+                <li style="font-family: Lobster; font-size:20px;"> <%= link_to 'All Donors', users_path %></li>
+                <li style="font-family: Lobster; font-size:20px;"> <%= link_to 'All Admins', users_admins_path %></li>
+                <li class="divider"></li>
+                <li> <%= link_to 'Add new Admin', admin_invite_path %></li>
+                <li class="divider"></li>
                 <li>
                 <%= link_to "Log out", admin_logout_path, method: "delete" %>
                 </li>

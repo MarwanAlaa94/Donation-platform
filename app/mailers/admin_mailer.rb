@@ -7,4 +7,10 @@ class AdminMailer < ApplicationMailer
     mail(to: @message.email, subject: "Donation Platform Reply to: "+@message.subject)
   end
 
+  def invite_email(user, rand_password)
+  	@user = user
+  	@rand_password = rand_password
+  	@url  = 'http://localhost:3000/admin'
+  	mail(to: @user.email, subject: "Donation Platform invitation for administration")
+  end
 end

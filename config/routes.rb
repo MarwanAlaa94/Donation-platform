@@ -34,7 +34,9 @@ end
   get    '/admin/',   to: 'sessions#new_admin'
   post   '/admin/login',   to: 'sessions#create_admin'
   delete '/admin/logout',  to: 'sessions#destroy_admin'
-  
+  get    '/admin/invite',  to: 'users#invite_admin'
+  post    '/admin/invite',  to: 'users#invite_new_admin'
+  get    '/users_admins', to:'users#index_admins'
   post   '/messages/:id/',   to: 'messages#adminReply'
   get 'auth/:provider/callback' => 'sessions#create_donor_provider'
   get 'auth/failure' => redirect('/')

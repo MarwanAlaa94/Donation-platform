@@ -7,6 +7,36 @@ class UsersController < ApplicationController
     @users = User.all
   end
 
+  def index_admins
+    @users = User.all
+  end
+  # GET /users/invite
+  def invite_admin
+    @user = User.new
+  end
+
+  #POST /users/invite
+  def invite_new_admin
+    rand_password = (('0'..'9').to_a + ('a'..'z').to_a + ('A'..'Z').to_a).shuffle.first(10).join
+    params[:user][:password] = rand_password
+    params[:user][:password_confirmation] = rand_password
+    params[:user][:isAdmin] = true
+
+    @user = User.new(user_params)
+
+    respond_to do |format|
+      if @user.save
+        @user.send_admin_invitation_mail(rand_password)
+        # Tell the UserMailer to send a welcome Email after save
+        format.html { redirect_to admin_home_path, notice: 'New Admin was invited by email.' }
+      else
+        format.html { render :invite_admin }
+        format.json { render json: @user.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+
   # GET /users/1
   # GET /users/1.json
   def show
@@ -80,6 +110,6 @@ class UsersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
-      params.require(:user).permit(:user_name, :email, :password, :password_confirmation, :avatar, :avatar_cache, :remove_avatar)
+      params.require(:user).permit(:user_name, :email, :password, :password_confirmation, :avatar, :avatar_cache, :remove_avatar, :isAdmin)
     end
 end

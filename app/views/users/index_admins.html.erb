@@ -1,6 +1,6 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Donors</h1>
+<h1>Admins</h1>
 <div  style="font-size:20px;">
 
 <table class="table">
@@ -14,7 +14,7 @@
 
   <tbody>
     <% @users.each do |user| %>
-      <% if !user.isAdmin %>
+      <% if user.isAdmin %>
       <tr>
         <td><%= truncate(user.user_name, :length => 100)  %></td>
         <td><%= truncate(user.email, :length => 100) %></td>

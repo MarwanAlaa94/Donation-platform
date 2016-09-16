@@ -12,9 +12,11 @@ class User < ApplicationRecord
   validates :email,presence: true , uniqueness:{ case_sensetive: false }, format: { with: VALID_EMAIL_REGEX}
 
    # User Avatar Validation
-  validates_presence_of   :avatar
+  #validates_presence_of   :avatar
   validates_integrity_of  :avatar
   validates_processing_of :avatar
+
+
 
   def self.from_omniauth(auth)
       where(auth.slice(:user_name)).first_or_initialize.tap do |user|
@@ -37,6 +39,9 @@ class User < ApplicationRecord
 
   def send_admin_mail
     UserMailer.welcome_email(self).deliver
+  end
+  def send_admin_invitation_mail(rand_password)
+    AdminMailer.invite_email(self,rand_password).deliver
   end
 
  

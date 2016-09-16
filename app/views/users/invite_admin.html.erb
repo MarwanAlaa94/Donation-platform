@@ -1,0 +1,42 @@
+<% provide(:title, "Admin Sign in") %>
+<h1>Add new Admin</h1>
+
+<% flash.each do |key, value| %>
+    <%= content_tag(:div, value, class: "alert alert-#{key}") %>
+<% end %>
+
+
+
+<div class="row">
+	<div class="col-md-6 col-md-offset-3">
+		<% if @user.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
+
+          <ul>
+          <% @user.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+          </ul>
+        </div>
+      <% end %>
+		<%= form_for(:user, :url => admin_invite_path) do |f| %>
+		
+			<%= f.label :user_name , :required => true%>
+        	<%= f.text_field :user_name , class: 'form-control'%>
+
+			<%= f.label :email , :required => true%>
+			<%= f.text_field :email, class: 'form-control' %>
+
+			<%= f.hidden_field :password %>
+			<%= f.hidden_field :password_confirmation %>
+			<%= f.hidden_field :avatar %>
+			<%= f.hidden_field :avatar_cache %>
+			<%= f.hidden_field :remove_avatar %>
+
+
+			<%= button_to "Invite", admin_invite_path, method: :post, class: "btn btn-primary" %>
+		<% end %>
+				
+	</div>
+</div>

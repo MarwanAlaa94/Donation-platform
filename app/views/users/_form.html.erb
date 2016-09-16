@@ -36,7 +36,7 @@
             <% end %>
           <% end %>
 
-          <label>Upload Image:
+          <label>Upload Profile Picture
             <%= f.file_field :avatar, class: 'form-control' %>
           </label>
           <%= f.hidden_field :avatar_cache %>
@@ -44,7 +44,9 @@
         <% else %>
           <div class="field">
             <%= f.label :avatar do %>
-              <%= f.file_field :avatar , class: 'form-control'%>
+              <label>Upload Profile Picture
+                <%= f.file_field :avatar, class: 'form-control' %>
+              </label>
               <%= f.hidden_field :avatar_cache %>
             <% end %>
           </div>
