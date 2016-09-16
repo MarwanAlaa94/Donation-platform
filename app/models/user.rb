@@ -1,6 +1,11 @@
 class User < ApplicationRecord
-  has_and_belongs_to_many :needs
-    
+  has_many :payments
+    has_many :needs, through: :payments
+    accepts_nested_attributes_for :payments,
+
+             :allow_destroy => true
+    accepts_nested_attributes_for :needs
+
   mount_uploader :avatar, AvatarUploader
 
 
@@ -27,7 +32,7 @@ class User < ApplicationRecord
 
       #user.oauth_token = auth.credentials.token
       #user.oauth_expires_at = Time.at(auth.credentials.expires_at)
-      
+
       if auth.info.email == nil
         user.email = "user@example.com"
       else
@@ -44,7 +49,7 @@ class User < ApplicationRecord
     AdminMailer.invite_email(self,rand_password).deliver
   end
 
- 
+
   private
     def avatar_size_validation
       errors[:avatar] << "should be less than 500KB" if avatar.size > 0.5.megabytes

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160915233914) do
+ActiveRecord::Schema.define(version: 20160916221204) do
 
   create_table "messages", force: :cascade do |t|
     t.string   "name"
@@ -92,6 +92,18 @@ ActiveRecord::Schema.define(version: 20160915233914) do
     t.integer  "image_file_size"
     t.datetime "image_updated_at"
     t.boolean  "isApproved",         default: false
+  end
+
+  create_table "payments", force: :cascade do |t|
+    t.string   "need_name"
+    t.integer  "need_id"
+    t.integer  "org_id"
+    t.integer  "user_id"
+    t.float    "donated_money"
+    t.string   "comment"
+    t.boolean  "is_recieved"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
   end
 
   create_table "users", force: :cascade do |t|

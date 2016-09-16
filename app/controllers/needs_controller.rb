@@ -18,13 +18,20 @@ class NeedsController < ApplicationController
       @need.need_images.build
   end
 
+  def donate
+   @need = Need.find(params[:need_id])
+
+   @payment= @need.payments.build(org_id: @need.organization.id,
+    user_id: current_user.id , need_name:@need.title , is_recieved: false)
+ end
+
   def create
     @organization = Organization.find(params[:organization_id])
     @need = @organization.needs.create(need_params)
       if @organization.save
           redirect_to organization_path(@organization)
         else
-         render :new 
+         render :new
   end
 end
 
@@ -58,6 +65,9 @@ end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def need_params
-      params.require(:need).permit(:title, :description, :start_date, :end_date, :in_progress, :money, :urgent_rate, :achievment_flag,need_images_attributes:[:caption,:photo,:id])
-    end
+        params.require(:need).permit(:title, :description, :start_date, :end_date, :in_progress, :money,
+         :urgent_rate, :achievment_flag ,need_images_attributes:[:caption,:photo,:id] ,
+         payments_attributes:[:comment ,:need_name, :donated_money, :user_id, :org_id , :id , :is_recieved])
+
+      end
 end

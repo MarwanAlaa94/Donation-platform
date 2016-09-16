@@ -13,7 +13,9 @@ end
 
   resources :messages
   resources :organizations do
-    resources :needs
+    resources :needs do
+    get 'donation' => 'needs#donate'
+  end
     get 'Achievements' => 'needs#indexAchivements'
   end
   resources :users
@@ -30,7 +32,7 @@ end
   get    '/donor/login',   to: 'sessions#new_donor'
   post   '/donor/login',   to: 'sessions#create_donor'
   delete '/donor/logout',  to: 'sessions#destroy_donor'
-  get    '/admin/login',   to: 'sessions#new_admin'  
+  get    '/admin/login',   to: 'sessions#new_admin'
   delete '/admin/logout',  to: 'sessions#destroy_admin'
   get    '/admin/invite',  to: 'users#invite_admin'
   post    '/admin/invite',  to: 'users#invite_new_admin'

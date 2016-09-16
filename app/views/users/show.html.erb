@@ -9,6 +9,17 @@
   <strong>Email:</strong>
   <%= @user.email %>
 </p>
+<p>
+  <br><br>
+  <h1>Your donations</h1>
+
+  <%  @user.payments.each do |pay| %>
+      <strong>  Name of need: </strong> <%= pay.need_name %>
+      <strong> Donated money: </strong> <%= pay.donated_money%>
+      <br><br>
+  <%end%>
+
+</p>
 
 <% if @user.avatar? %>
 	<p>

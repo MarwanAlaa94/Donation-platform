@@ -1,5 +1,13 @@
 class Need < ApplicationRecord
-  has_and_belongs_to_many :users
+
+    has_many :payments
+    has_many :users , through: :payments
+    accepts_nested_attributes_for :payments,
+
+             :allow_destroy => true
+    accepts_nested_attributes_for :users
+
+
   belongs_to :organization
   has_many :need_images, :dependent => :destroy
 
