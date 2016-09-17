@@ -25,6 +25,7 @@ gem 'carrierwave'
 gem 'devise'
 gem 'mini_magick'
 gem 'fog'
+gem 'wdm'
 
 #gem 'valid_url'
 

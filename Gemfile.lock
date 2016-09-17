@@ -391,6 +391,7 @@ GEM
       execjs (>= 0.3.0, < 3)
     warden (1.2.6)
       rack (>= 1.0)
+    wdm (0.1.1)
     web-console (3.1.1)
       activemodel (>= 4.2)
       debug_inspector
@@ -441,6 +442,7 @@ DEPENDENCIES
   turbolinks (= 5.0.1)
   tzinfo-data
   uglifier (= 3.0.0)
+  wdm
   web-console (= 3.1.1)
   will_paginate (= 3.1.0)
 

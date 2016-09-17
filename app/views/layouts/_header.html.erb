@@ -11,6 +11,9 @@
     </div>
     <div class="navbar-collapse collapse" id="navbar-collapsible">
       <ul class="nav navbar-nav navbar-right">
+      
+      <%= render partial: "/searches/new"%>
+      
         <% if !logged_in?  && !donor_logged_in? && !admin_logged_in? %>
             <li><%= link_to "Donor SignIn", donor_login_path%></li>
             <li><%= link_to "Donor SignUp", donor_register_path%></li>
@@ -88,21 +91,7 @@
           <% end %>
 
       </ul>
-      <form style="padding:8px;">
-        <div class="form-group" style="display:inline;">
-          <div class="input-group">
-            <div class="input-group-btn">
-              <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-chevron-down"></span></button>
-              <ul class="dropdown-menu">
-                <li><a href="#">Ordinary Search</a></li>
-                <li><a href="#">Advanced Search</a></li>
-              </ul>
-            </div>
-            <input type="text" style="font-size: 14px;"class="form-control" placeholder="What are searching for?">
-            <span class="input-group-addon"><span class="glyphicon glyphicon-search"></span> </span>
-          </div>
-        </div>
-      </form>
+      
     </div>
   </div>
 </nav>

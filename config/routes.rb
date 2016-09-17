@@ -20,6 +20,7 @@ end
   end
   resources :users
   resources :organization_searches
+   resources :searches
   root 'organizations#index'
   get 'needs', to:'needs#index'
   get 'achiev' , to:'needs#indexAchivements'
