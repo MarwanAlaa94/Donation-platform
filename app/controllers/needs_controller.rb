@@ -28,17 +28,18 @@ class NeedsController < ApplicationController
   def donate
    @need = Need.find(params[:need_id])
    @payment= @need.payments.build(org_id: @need.organization.id,
-    user_id: current_user.id , need_name:@need.title , is_recieved: false)
+    user_id: current_user.id , need_name:@need.title , is_recieved: false
+     )
  end
 
   def recieve
      @payment = Payment.find(params[:payment_id])
-     @payment.is_recieved = true 
+     @payment.is_recieved = true
      @payment.save
      @payment.need.donated_money += @payment.donated_money
     if @payment.need.donated_money >= @payment.need.money
            @payment.need.achievment_flag = true
-     
+
 end
     @payment.need.save
 

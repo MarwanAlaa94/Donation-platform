@@ -1,11 +1,13 @@
 <h1>My payments</h1>
   <%  @user.payments.each do |pay| %>
+        <strong> Organization: </strong> <%= Organization.all.where(id:pay.org_id)[0].org_name %>
       <strong>  Name of need: </strong> <%= pay.need_name %>
       <strong> Donated money: </strong> <%= pay.donated_money%>
+      <strong> Time of Donation: </strong> <%= pay.created_at.strftime("%H:%M - %d %b. %Y") %>
       <% if pay.is_recieved%>
-         <strong style="color:green;"> Recieved </strong> 
+         <strong style="color:green;"> Recieved </strong>
       <%else%>
-        <strong style="color:blue;"> Not recieved </strong> 
+        <strong style="color:blue;"> Not recieved </strong>
       <%end%>
       <br><br>
   <%end%>

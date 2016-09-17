@@ -52,10 +52,19 @@ class UsersController < ApplicationController
 
    @user = User.find(params[:user_id])
     @payments = @user.payments
-    @payments = @payments.sort_by &:org_id
-
-    @payments.each do |pay|
-      
+    @payments1 = @payments.sort_by &:org_id
+    @lists=[]
+    @lists.append([])
+    i=0;j=0;
+    @payments1.each do |pay|
+        if j!=0
+          if @payments1[j].org_id!=@payments1[j-1].org_id
+            @lists.append([])
+            i+=1
+          end
+        end
+        @lists[i].append(@payments1[j])
+        j+=1
     end
   end
 
