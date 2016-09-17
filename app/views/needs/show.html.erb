@@ -35,19 +35,18 @@
   <%= @need.urgent_rate %>
 </p>
 
-
-  <%total_money = 0%>
+<p>
   <strong>Donated money:</strong>
-  <%  @need.payments.each do |pay| %>
-    <%total_money+= pay.donated_money%>
-  <%end%>
-  <%=total_money%>
+   <%= @need.donated_money %>
 </p>
 
+
+
 <p>
-
+  
+  <% if donor_logged_in? %>
   <%= link_to 'Donate' , organization_need_donation_path( @need.organization , @need)%>
-
+<%end%>
 </p>
 
 
@@ -70,14 +69,8 @@
 <%end%>
 <% end %>
 <% if current_organization?(@need.organization) %>
-  <% @need.payments.each do |pay| %>
-    <%if !pay.is_recieved%>
-      <strong>Donated money </strong><%=pay.donated_money%>|
-      <strong>Comment </strong><%=pay.comment%>
-      <br>
-    <%end%>
-  <%end%>
+  <h1><%= link_to 'Payments', organization_need_needPayments_path(need_id: @need.id) %> </h1> 
+  <%= link_to 'Edit', edit_organization_need_path(@need) %> 
 <%end%>
 
-<%= link_to 'Edit', edit_organization_need_path(@need) %> |
-<%= link_to 'Back', organization_needs_path %>
+ <%= link_to 'Back', organization_needs_path %>

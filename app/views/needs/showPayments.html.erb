@@ -1,0 +1,11 @@
+<% @need.payments.each do |pay| %>
+    <%if !pay.is_recieved%>
+      <strong>User name </strong><%=pay.user_name%>|<strong>Donated money </strong><%=pay.donated_money%>|<strong>User number </strong><%=pay.user_number%>|<strong>User address </strong><%=pay.user_address%>
+      <strong>Comment </strong><%=pay.comment%>
+      <div style="width:10%;">
+      <%= button_to 'Recieve', organization_need_recieve_pay_path(@need.organization ,id: @need.id, payment_id:  pay.id) ,method: :post, class: "btn btn-primary" %>
+</div>
+      <br>
+    <%end%>
+
+  <%end%>

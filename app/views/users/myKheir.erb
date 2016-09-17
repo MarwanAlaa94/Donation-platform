@@ -1,0 +1,24 @@
+<h1>My payments</h1>
+  <%  @payments.each do |pay| %>
+      <strong>  Name of need: </strong> <%= pay.need_name %>
+      <strong> Donated money: </strong> <%= pay.donated_money%>
+      <% if pay.is_recieved%>
+         <strong style="color:green;"> Recieved </strong> 
+      <%else%>
+        <strong style="color:blue;"> Not recieved </strong> 
+      <%end%>
+      <br><br>
+  <%end%>
+
+
+  <h1>My payments sorted</h1>
+  <%  @payments1.each do |pay| %>
+      <strong>  Name of need: </strong> <%= pay.need_name %>
+      <strong> Donated money: </strong> <%= pay.donated_money%>
+      <% if pay.is_recieved%>
+         <strong style="color:green;"> Recieved </strong> 
+      <%else%>
+        <strong style="color:blue;"> Not recieved </strong> 
+      <%end%>
+      <br><br>
+  <%end%>

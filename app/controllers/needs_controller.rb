@@ -1,5 +1,6 @@
 class NeedsController < ApplicationController
   before_action :set_need, only: [:show, :edit, :update, :destroy]
+   before_action :correct_user,   only: [:edit,:destroy,:showPayments]
 
   def index
       @needs = Need.where(organization_id: params[:organization_id] ,achievment_flag:false)
@@ -10,6 +11,12 @@ class NeedsController < ApplicationController
   end
   def show
   end
+
+  def showPayments
+    @need = Need.find(params[:need_id])
+  end
+
+
   def new
     @organization = Organization.find(params[:organization_id])
     @need=@organization.needs.build
@@ -20,10 +27,23 @@ class NeedsController < ApplicationController
 
   def donate
    @need = Need.find(params[:need_id])
-
    @payment= @need.payments.build(org_id: @need.organization.id,
     user_id: current_user.id , need_name:@need.title , is_recieved: false)
  end
+
+  def recieve
+     @payment = Payment.find(params[:payment_id])
+     @payment.is_recieved = true 
+     @payment.save
+     @payment.need.donated_money += @payment.donated_money
+    if @payment.need.donated_money >= @payment.need.money
+           @payment.need.achievment_flag = true
+     
+end
+    @payment.need.save
+
+
+  end
 
   def create
     @organization = Organization.find(params[:organization_id])
@@ -67,7 +87,8 @@ end
     def need_params
         params.require(:need).permit(:title, :description, :start_date, :end_date, :in_progress, :money,
          :urgent_rate, :achievment_flag ,need_images_attributes:[:caption,:photo,:id] ,
-         payments_attributes:[:comment ,:need_name, :donated_money, :user_id, :org_id , :id , :is_recieved])
+         payments_attributes:[:comment ,:need_name, :donated_money, :user_id, :org_id ,
+          :id , :is_recieved , :user_name , :user_address , :user_number])
 
       end
 end
