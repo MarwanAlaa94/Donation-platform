@@ -11,14 +11,11 @@
 </p>
 <p>
   <br><br>
-  <h1>Your donations</h1>
+  <h1>
+<%= link_to 'My payments', user_showPayment_path(user_id: @user.id) %><br>
+<%= link_to 'My Kheir', user_myKheir_path(user_id: @user.id) %>
 
-  <%  @user.payments.each do |pay| %>
-      <strong>  Name of need: </strong> <%= pay.need_name %>
-      <strong> Donated money: </strong> <%= pay.donated_money%>
-      <br><br>
-  <%end%>
-
+</h1>
 </p>
 
 <% if @user.avatar? %>

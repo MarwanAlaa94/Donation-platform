@@ -137,7 +137,4 @@ class OrganizationsController < ApplicationController
         redirect_to(root_url) unless current_organization?(@organization) || admin_logged_in?
     end
 
-    def correct_user
-        @organization = Organization.find(params[:id])
-        redirect_to(root_url) unless current_organization?(@organization)
-    end
+    

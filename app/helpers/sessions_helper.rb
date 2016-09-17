@@ -61,4 +61,9 @@ module SessionsHelper
 		session.delete(:admin_id)
 		@current_admin = nil
 	end
+
+	def correct_user
+        @organization = Organization.find(params[:organization_id])
+        redirect_to(root_url) unless current_organization?(@organization)
+    end
 end

@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:show, :edit, :update, :destroy]
+  before_action :set_user, only: [:show, :edit, :update, :destroy ]
   before_action :correct_donor_or_admin, only: [:show, :destroy]
   before_action :correct_donor, only: [ :edit, :update]
   before_action :logged_in_admin, only:[:index,:index_admins]
@@ -43,6 +43,22 @@ class UsersController < ApplicationController
   # GET /users/1.json
   def show
   end
+  def showPayment
+    @user = User.find(params[:user_id])
+    @payments = @user.payments
+  end
+
+  def myKheir
+
+   @user = User.find(params[:user_id])
+    @payments = @user.payments
+    @payments = @payments.sort_by &:org_id
+
+    @payments.each do |pay|
+      
+    end
+  end
+
 
   # GET /users/new
   def new
