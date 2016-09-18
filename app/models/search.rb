@@ -10,7 +10,7 @@ class Search < ApplicationRecord
 
 	def search_organizations
 		organizations = Organization.all
-		organizations = organizations.where("org_name LIKE?","%#{keyword}%").or(organizations.where(["info LIKE?","%#{keyword}%"]))
+		organizations = organizations.where("org_name LIKE?","%#{keyword}%").or(organizations.where(["info LIKE?","%#{keyword}%"])).or(organizations.where(["email LIKE?","%#{keyword}%"]))
 	    organizations = organizations.where("isApproved = ?", true)
 		return organizations
 	end

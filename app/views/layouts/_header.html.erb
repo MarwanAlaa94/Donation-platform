@@ -8,7 +8,7 @@
         <span class="icon-bar"></span>
       </button>
       <%= link_to "Donation Platform", root_path, class: "navbar-brand" %>
-      <%= render partial: "/searches/new"%>
+      <!--<%= render partial: "/searches/new"%>-->
     </div>
     <div class="navbar-collapse collapse" id="navbar-collapsible">
       <ul class="nav navbar-nav navbar-right">
@@ -87,14 +87,23 @@
                 </li>
               </ul>
               </li>
-
-
-
-
           <% end %>
-
       </ul>
       
+      <% search= Search.new %>
+      <%= form_for search , :html => { :style => 'padding:8px;' }  do |f|%>
+     
+        <div class="form-group" style="display:inline;">
+          <div class="input-group">
+
+            <input type="text" name="search[keyword]" style="font-size: 14px;"class="form-control" placeholder="What are searching for?">
+            <span type="submit" class="input-group-addon"><span class="glyphicon glyphicon-search"></span> </span>
+          </div>
+        </div>
+
+      <%end %>
+
+
     </div>
   </div>
 </nav>
