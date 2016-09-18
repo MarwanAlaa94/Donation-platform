@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   get 'admin/home'
 
 
-
+  
   resources :messages
   resources :organizations do
     resources :needs do
@@ -25,6 +25,7 @@ Rails.application.routes.draw do
     get '/myKheir' => 'users#myKheir'
   end
   resources :organization_searches
+  resources :searches
   root 'organizations#index'
   get    '/signUp',   to: 'organizations#new'
   get    '/login',   to: 'sessions#new'
