@@ -117,7 +117,7 @@ class UsersController < ApplicationController
     donor_log_out
     @user.destroy
     respond_to do |format|
-      format.html { redirect_to users_url, notice: 'Donor was successfully deleted.' }
+      format.html { redirect_to root_url, notice: 'Donor was successfully deleted.' }
       format.json { head :no_content }
     end
   end

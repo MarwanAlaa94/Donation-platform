@@ -29,7 +29,7 @@ class User < ApplicationRecord
       # user.uid = auth.uid
       user.user_name = auth.info.name
       user.password = "test"
-
+      user.remote_avatar_url = auth.info.image.gsub('http://','https://')
       #user.oauth_token = auth.credentials.token
       #user.oauth_expires_at = Time.at(auth.credentials.expires_at)
 

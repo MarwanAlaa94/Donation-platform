@@ -10,6 +10,12 @@
   <%= @user.email %>
 </p>
 <p>
+  <% if @user.avatar? %>
+  <p>
+    <strong>Image:</strong><br />
+      <%= image_tag @user.avatar.url, :size => "200x200", :crop => :fill %>
+  </p>
+<% end %>
   <br><br>
   <h1>
 <%= link_to 'My payments', user_showPayment_path(user_id: @user.id) %><br>
@@ -18,12 +24,7 @@
 </h1>
 </p>
 
-<% if @user.avatar? %>
-	<p>
-		<strong>Image:</strong><br />
-	  	<%= image_tag @user.avatar.url(:medium) %>
-	</p>
-<% end %>
+
 <% if admin_logged_in? && !@user.isAdmin%>
   <h1><%= link_to 'Delete Profile', @user, method: :delete, data: { confirm: 'Are you sure?' } %></h1>
 <% end %>

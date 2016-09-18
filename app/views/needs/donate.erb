@@ -12,7 +12,8 @@
       </ul>
     </div>
   <% end %>
-
+<h1>Cache from Home</h1>
+<h3 style="text-align:center;">Please fill the form to contact you easily<h3>
         <div class="row">
         	<div class="col-md-6 col-md-offset-3">
           <% counter = @need.payments.count%>
@@ -20,20 +21,20 @@
                     <% if counter == 0 %>
                     <p>
 
-                      <%= payment.label :user_name, "Write your name" %>
+                      <%= payment.label :user_name, "Name: *" %>
                       <%= payment.text_field :user_name , class: 'form-control' %>
 
-                      <%= payment.label :user_number, "Write your number" %>
+                      <%= payment.label :user_number, "Phone Number: *" %>
                       <%= payment.text_field :user_number , class: 'form-control' %>
 
-                       <%= payment.label :user_address, "Write your address" %>
+                       <%= payment.label :user_address, "Address: *" %>
                       <%= payment.text_field :user_address , class: 'form-control' %>
 
 
-                      <%= payment.label :donated_money, "Write amount you would donate with" %>
+                      <%= payment.label :donated_money, "Donation amount of money(LE): *" %>
                       <%= payment.number_field :donated_money ,class: 'form-control'  %>
 
-                      <%= payment.label :comment, "Write a comment about the need" %>
+                      <%= payment.label :comment, "Comment about the need:" %>
                       <%= payment.text_field :comment , class: 'form-control' %>
 
                       <%= payment.text_field :need_name  ,type:"hidden", class: 'form-control' %>
@@ -54,7 +55,7 @@
           </div>
           </div>
           <div class="submit">
-            <%= f.submit "Done", class: "btn btn-primary" %>
+            <%= f.submit "Finish", class: "btn btn-primary" %>
           </div>
 
 <% end %>

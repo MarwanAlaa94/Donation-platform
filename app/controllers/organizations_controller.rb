@@ -1,7 +1,7 @@
 class OrganizationsController < ApplicationController
   before_action :set_organization, only: [:show,:editAndaddImages ,:edit, :update, :destroy]
   before_action :logged_in_user, only: [:edit,:show, :update]
-  before_action :correct_user,   only: [:edit, :update,:editAndaddImages]
+  before_action :correct_user_org,   only: [:edit, :update,:editAndaddImages]
   before_action :correct_user_or_admin,   only: [:destroy]
   # GET /organizations
   # GET /organizations.json
@@ -136,5 +136,9 @@ class OrganizationsController < ApplicationController
         @organization = Organization.find(params[:id])
         redirect_to(root_url) unless current_organization?(@organization) || admin_logged_in?
     end
+   def correct_user_org
 
+        @organization = Organization.find(params[:id])
+        redirect_to(root_url) unless current_organization?(@organization)
+    end
     

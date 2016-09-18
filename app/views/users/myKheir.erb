@@ -1,6 +1,8 @@
 
   <% totalOfMoney=0 %>
+  <% if @lists.count !=0 %>
   <%@lists.each do |list| %>
+  <% if list.count !=0 %>
         <br>
       <h3><strong> <u>Organization Name:</u> </strong>
           <%=Organization.all.where(id: list[0].org_id)[0].org_name%>
@@ -21,7 +23,10 @@
         <% total+=payment.donated_money %>
         <% totalOfMoney+=payment.donated_money %>
     <%end%>
+
         <br>
         <h4><strong> Total Money donated to this Organization: </strong> <%= total%>  </h4>
+        <%end%>
   <%end%>
 <h1>  <strong> The total of your donations: </strong> <%= totalOfMoney%></h1>
+<% end %>
