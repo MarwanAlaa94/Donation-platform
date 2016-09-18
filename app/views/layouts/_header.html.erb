@@ -8,6 +8,7 @@
         <span class="icon-bar"></span>
       </button>
       <%= link_to "Donation Platform", root_path, class: "navbar-brand" %>
+      <%= render partial: "/searches/new"%>
     </div>
     <div class="navbar-collapse collapse" id="navbar-collapsible">
       <ul class="nav navbar-nav navbar-right">
@@ -93,21 +94,7 @@
           <% end %>
 
       </ul>
-      <form style="padding:8px;">
-        <div class="form-group" style="display:inline;">
-          <div class="input-group">
-            <div class="input-group-btn">
-              <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-chevron-down"></span></button>
-              <ul class="dropdown-menu">
-                <li><a href="#">Ordinary Search</a></li>
-                <li><a href="#">Advanced Search</a></li>
-              </ul>
-            </div>
-            <input type="text" style="font-size: 14px;"class="form-control" placeholder="What are searching for?">
-            <span class="input-group-addon"><span class="glyphicon glyphicon-search"></span> </span>
-          </div>
-        </div>
-      </form>
+      
     </div>
   </div>
 </nav>

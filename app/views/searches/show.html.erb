@@ -1,0 +1,38 @@
+<h1> Organzations </h1>
+
+<% if @search.search_organizations.empty? %>
+	<p> No organizations Found </p>
+<% else %>
+	<% @search.search_organizations.each do |org| %>
+		<br>
+		 <div class="organization_temp">
+      	  	<h3><%= image_tag   org.image.url(:thumb)%></h3>
+        	<h4><strong>Name:</strong</h4>
+       		 <strong> <%= org.org_name %></strong>
+       		 <h4><strong>Website:</strong</h4>
+        	<strong>  <%= org.website_URL%></strong>
+      </div>
+		
+	<% end %>
+<% end %>
+
+
+<h1> Needs </h1>
+
+<% if @search.search_needs.empty? %>
+	<p> No needs Found </p>
+<% else %>
+	<% @search.search_needs.each do |need| %>
+		<br>
+		<div class="organization_temp">
+      	  
+        	<h4><strong>Title:</strong</h4>
+       		 <strong> <%= need.title %></strong>
+       		 <h4><strong>description:</strong</h4>
+        	<strong>  <%= need.description%></strong>
+      </div>	
+	<% end %>
+<% end %>
+
+
+
