@@ -4,33 +4,55 @@
 	<p> No organizations Found </p>
 <% else %>
 	<% @search.search_organizations.each do |org| %>
-		<br>
-		 <div class="organization_temp">
-      	  	<h3><%= image_tag   org.image.url(:thumb)%></h3>
-        	<h4><strong>Name:</strong</h4>
-       		 <strong> <%= org.org_name %></strong>
-       		 <h4><strong>Website:</strong</h4>
-        	<strong>  <%= org.website_URL%></strong>
-      </div>
-		
+		<%= link_to org do %>
+		<div class="organization_temp">
+			<br>
+			<% if org.image_file_name? %> 
+				<h1><%= image_tag   org.image.url(:medium)%></h1>
+			<% end %>
+        	<h3> <strong>Organization Name: </strong><%= org.org_name %></h3>
+       		<h4><strong> Website: </strong> <%= org.website_URL%></h4>
+      	</div>
+	  	<% end %>
 	<% end %>
 <% end %>
 
 
-<h1> Needs </h1>
 
+
+<h1> Needs </h1>
 <% if @search.search_needs.empty? %>
 	<p> No needs Found </p>
 <% else %>
 	<% @search.search_needs.each do |need| %>
-		<br>
+		<%= link_to organization_need_path(need.organization.id,need) do %>
 		<div class="organization_temp">
-      	  
-        	<h4><strong>Title:</strong</h4>
-       		 <strong> <%= need.title %></strong>
-       		 <h4><strong>description:</strong</h4>
-        	<strong>  <%= need.description%></strong>
-      </div>	
+        	<h3><strong>Title:</strong> <%= need.title %></h3>
+       		<h4><strong>description:</strong><%= need.description%></h4>
+      	</div>
+	  	<% end %>	
+	<% end %>
+<% end %>
+
+
+
+<% if logged_in? %>
+	<h1> Users </h1>
+
+	<% if @search.search_users.empty? %>
+		<p> No Users Found </p>
+	<% else %>
+		<% @search.search_users.each do |user| %>
+			<%= link_to user do %>
+			<div class="organization_temp">
+				<% if user.avatar? %>
+ 			 		<p><%= image_tag user.avatar.url, :size => "200x200", :crop => :fill %></p>
+				<% end %>
+        		<h3><strong>Name:</strong><%=  user.user_name  %></h3>
+				<h3><strong>Email:</strong><%=  user.email  %></h3>
+      		</div>	
+	 		 <% end %>
+		<% end %>
 	<% end %>
 <% end %>
 

@@ -1,10 +1,10 @@
 class SearchesController < ApplicationController
 
-def new 
+	def new 
     	@search = Search.new    
  	 end
 
- 	 def create
+ 	def create
     	@search = Search.create!(search_params)
    	 	redirect_to @search
   	end
@@ -19,3 +19,4 @@ def new
  		params.require(:search).permit(:keyword )
  	end
 end
+
