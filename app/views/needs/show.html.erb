@@ -1,8 +1,13 @@
 <p id="notice"><%= notice %></p>
 
+
+
 <p>
-  <strong>Title:</strong>
-  <%= @need.title %>
+  <h3><strong>Title:</strong> <%= @need.title %></h3>
+</p>
+
+<p>
+  <h4><strong>Organization:</strong> <%= link_to @need.organization.org_name , @need.organization   %></h4>
 </p>
 
 <p>
