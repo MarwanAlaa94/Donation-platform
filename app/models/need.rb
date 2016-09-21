@@ -19,4 +19,8 @@ class Need < ApplicationRecord
   validates :money, presence:true
   validates :urgent_rate, presence:true
 
+  def send_payment_ignorance_mail(user,payment)  
+    UserMailer.payment_ignorance_email(self,user, payment).deliver
+  end
+
 end

@@ -1,5 +1,5 @@
 class NeedsController < ApplicationController
-  before_action :set_need, only: [:show, :edit, :update, :destroy]
+  before_action :set_need, only: [:show, :edit, :update, :destroy, :ignore]
    before_action :correct_user,   only: [:edit,:destroy,:showPayments]
 
   def index
@@ -44,8 +44,11 @@ class NeedsController < ApplicationController
     @payment.need.save
   end
 
+
   def ignore
     @payment = Payment.find(params[:payment_id])
+    user= User.find(@payment.user_id)
+    @need.send_payment_ignorance_mail(user,@payment)
     @payment.destroy
     redirect_to organization_need_needPayments_path, notice: 'Payment was ignored successfully'
   end
