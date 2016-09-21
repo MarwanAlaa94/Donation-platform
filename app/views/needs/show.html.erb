@@ -75,7 +75,8 @@
 <% end %>
 <% if current_organization?(@need.organization) %>
   <h1><%= link_to 'Payments', organization_need_needPayments_path(need_id: @need.id) %> </h1> 
-  <%= link_to 'Edit', edit_organization_need_path(@need) %> 
+  <%= link_to 'Edit', organization_needs_path+"/"+@need.id.to_s+"/edit" %>  |
+  <%= link_to 'Delete',organization_needs_path+"/"+@need.id.to_s ,method: :delete , data: { confirm: 'Are you sure?' } %></td> |
 <%end%>
 
  <%= link_to 'Back', organization_needs_path %>

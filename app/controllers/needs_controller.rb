@@ -37,13 +37,17 @@ class NeedsController < ApplicationController
      @payment.is_recieved = true
      @payment.save
      @payment.need.donated_money += @payment.donated_money
-    if @payment.need.donated_money >= @payment.need.money
-           @payment.need.achievment_flag = true
+      if @payment.need.donated_money >= @payment.need.money
+        @payment.need.achievment_flag = true
 
-end
+      end
     @payment.need.save
+  end
 
-
+  def ignore
+    @payment = Payment.find(params[:payment_id])
+    @payment.destroy
+    redirect_to organization_need_needPayments_path, notice: 'Payment was ignored successfully'
   end
 
   def create
@@ -73,7 +77,7 @@ end
   def destroy
     @need.destroy
     respond_to do |format|
-      format.html { redirect_to needs_url, notice: 'Need was successfully destroyed.' }
+      format.html { redirect_to organization_needs_path, notice: 'Need was successfully destroyed.' }
       format.json { head :no_content }
     end
   end

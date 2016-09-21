@@ -27,9 +27,11 @@
     <%= f.label :end_date %>
     <%= f.date_select :end_date ,class: 'form-control'%>
 
-    <%= f.label :money %>
-    <%= f.text_field :money,class: 'form-control' %>
-    <br>
+    <% if need.money == nil %>
+      <%= f.label :money %>
+      <%= f.text_field :money,class: 'form-control' %>
+      <br>
+      <% end %>
     <%= f.label :urgent_rate %>
     <%= f.number_field :urgent_rate ,class: 'form-control'  %>
 

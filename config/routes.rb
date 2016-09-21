@@ -11,6 +11,7 @@ Rails.application.routes.draw do
     get 'needPayments' => 'needs#showPayments'
 
     post    'recieve/:id' => 'needs#recieve' , as: 'recieve_pay'
+    post    'ignore/:id' => 'needs#ignore' , as: 'ignore_pay'
   end
     collection do
     get    'notApproved' => 'organizations#notApproved' , as: 'notApproved'
