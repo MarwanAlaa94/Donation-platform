@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   
   resources :messages
   resources :organizations do
+    get '/needs/:id/addImage', to: 'needs#addImage', as: 'addImage'
     resources :needs do
     get 'donation' => 'needs#donate'
     get 'needPayments' => 'needs#showPayments'
