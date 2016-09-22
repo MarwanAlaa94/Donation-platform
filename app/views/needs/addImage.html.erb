@@ -1,0 +1,34 @@
+<%= form_for ([@need.organization, @need]) , html: { multipart: true } do |f| %>
+
+<div style="margin-top:4cm;">
+  <% counter=0 %>
+  <%= f.fields_for :need_images do |builder| %>
+      <% if counter != @need.need_images.count %>
+      <p>
+        <%image =@need.need_images[counter]%>
+        <%= image_tag  image.photo.url(:medium)%>
+        <%= builder.label :caption, "Edit Image #{counter+1}" %>
+        <%= builder.text_field :caption ,class: 'form-control'%>
+        <%= builder.label :photo, "Edit Image File #{counter+1} " %>
+        <%= builder.file_field :photo ,class: 'form-control' %>
+      </p>
+      <% else %>
+      <p>
+        <%= builder.label :caption, "New Image Caption" %>
+        <%= builder.text_field :caption,class: 'form-control' %>
+        <%= builder.label :photo, "New Image File" %>
+        <%= builder.file_field :photo,class: 'form-control' %>
+      </p>
+      <% end %>
+      <% counter=counter+1 %>
+  <% end %>
+</div>
+
+
+
+
+<div class="submit">
+  <%= f.submit "Add", class: "btn btn-primary" %>
+</div>
+
+<% end %>
