@@ -1,7 +1,7 @@
 class OrganizationsController < ApplicationController
   before_action :set_organization, only: [:show,:editAndaddImages ,:edit, :update, :destroy]
-  before_action :logged_in_user, only: [:edit,:show, :update]
-  before_action :correct_user_org,   only: [:edit, :update,:editAndaddImages]
+  before_action :logged_in_user, only: [:edit,:show]
+  before_action :correct_user_org,   only: [:edit]
   before_action :correct_user_or_admin,   only: [:destroy]
   # GET /organizations
   # GET /organizations.json
@@ -52,7 +52,8 @@ class OrganizationsController < ApplicationController
   # GET /organizations/1.json
   def show
     @organization = Organization.find(params[:id])
-    @needs = @organization.needs
+    @needs = @organization.needs.where(achievment_flag:false)
+    @achievments = @organization.needs.where(achievment_flag:true)
   end
 
   # GET /organizations/new
@@ -78,7 +79,7 @@ class OrganizationsController < ApplicationController
       if @organization.save
         # wait approve from admin # session[:organization_id]=@organization.id
 
-        format.html { redirect_to root_path, notice: 'Waiting for admin approvement. We will contact you soon.' }
+        format.html { redirect_to editImages_path(@organization)}
         #format.json { render :show, status: :created, location: @organization }
 
       else
@@ -92,9 +93,12 @@ class OrganizationsController < ApplicationController
   # PATCH/PUT /organizations/1.json
   def update
     respond_to do |format|
-      if @organization.update(organization_params)
+      if @organization.update(organization_params) && @organization.isApproved
         format.html { redirect_to @organization, notice: 'Organization was successfully updated.' }
         format.json { render :show, status: :ok, location: @organization }
+      elsif @organization.update(organization_params) && !@organization.isApproved
+          format.html { redirect_to root_url, notice: 'Waiting for admin approvement. We will contact you soon.' }
+          format.json { render :show, status: :ok, location: @organization }
       else
         format.html { render :edit }
         format.json { render json: @organization.errors, status: :unprocessable_entity }
@@ -141,4 +145,3 @@ class OrganizationsController < ApplicationController
         @organization = Organization.find(params[:id])
         redirect_to(root_url) unless current_organization?(@organization)
     end
-    
