@@ -1,4 +1,4 @@
-<nav class="navbar navbar-trans navbar-fixed-top" role="navigation">
+<nav class="navbar navbar-trans navbar-fixed-top"  style="opacity: 0.9;" role="navigation">
   <div class="container">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapsible">
@@ -25,6 +25,11 @@
               Settings <b class="caret"></b>
             </a>
             <ul class="dropdown-menu">
+              <li><%= link_to 'Add Need',new_organization_need_path(@current_organization) %></li>
+              <li><%= link_to 'AddImages',editImages_path(@current_organization) %></li>
+
+
+              <li class="divider"></li>
               <li><%= link_to "Edit Profile", edit_organization_path(@current_organization)%></li>
               <li><%= link_to 'Delete Profile', @current_organization, method: :delete, data: { confirm: 'Are you sure?' } %></li>
               <li class="divider"></li>
@@ -89,10 +94,10 @@
               </li>
           <% end %>
       </ul>
-      
+
       <% search= Search.new %>
       <%= form_for search , :html => { :style => 'padding:8px;' }  do |f|%>
-     
+
         <div class="form-group" style="display:inline;">
           <div class="input-group">
 
