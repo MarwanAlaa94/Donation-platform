@@ -1,5 +1,5 @@
 class NeedsController < ApplicationController
-  before_action :set_need, only: [:show, :edit,:addImage, :update, :destroy, :ignore]
+  before_action :set_need, only: [:show, :edit,:addImage, :update, :destroy,:ignore]
    before_action :correct_user,   only: [:edit,:destroy,:showPayments]
 
   def index
@@ -9,15 +9,17 @@ class NeedsController < ApplicationController
   def indexAchivements
       @needs = Need.where(organization_id: params[:organization_id] ,achievment_flag:true)
   end
+
+  def addImage
+      @need.need_images.build
+  end
   def show
   end
 
   def showPayments
     @need = Need.find(params[:need_id])
   end
-  def addImage
-      @need.need_images.build
-  end
+
 
   def new
     @organization = Organization.find(params[:organization_id])
@@ -46,20 +48,19 @@ class NeedsController < ApplicationController
     @payment.need.save
   end
 
-
   def ignore
-    @payment = Payment.find(params[:payment_id])
-    user= User.find(@payment.user_id)
-    @need.send_payment_ignorance_mail(user,@payment)
-    @payment.destroy
-    redirect_to organization_need_needPayments_path, notice: 'Payment was ignored successfully'
-  end
+   @payment = Payment.find(params[:payment_id])
+   user= User.find(@payment.user_id)
+   @need.send_payment_ignorance_mail(user,@payment)
+   @payment.destroy
+   redirect_to organization_need_needPayments_path, notice: 'Payment was ignored successfully'
+ end
 
   def create
     @organization = Organization.find(params[:organization_id])
     @need = @organization.needs.create(need_params)
       if @organization.save
-          redirect_to organization_path(@organization)
+          redirect_to  organization_needs_path+"/"+@need.id.to_s+"/addImage"
         else
          render :new
   end
@@ -77,6 +78,7 @@ end
       end
     end
   end
+
 
 
   def destroy
