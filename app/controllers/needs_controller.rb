@@ -15,7 +15,9 @@ class NeedsController < ApplicationController
   def showPayments
     @need = Need.find(params[:need_id])
   end
-
+  def addImage
+      @need.need_images.build
+  end
 
   def new
     @organization = Organization.find(params[:organization_id])
