@@ -13,13 +13,11 @@ $gray-medium-light: #eaeaea;
   margin: 0;
   li {
     overflow: auto;
-    padding: 10px 0;
+    padding: 1  px 0;
     border-bottom: 1px solid $gray-lighter;
   }
 }
-body {
-  padding-top: 60px;
-}
+
 
 section {
   overflow: auto;
