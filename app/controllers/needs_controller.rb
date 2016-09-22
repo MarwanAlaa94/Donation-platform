@@ -1,5 +1,5 @@
 class NeedsController < ApplicationController
-  before_action :set_need, only: [:show, :edit, :update, :destroy, :ignore]
+  before_action :set_need, only: [:show, :edit,:addImage, :update, :destroy, :ignore]
    before_action :correct_user,   only: [:edit,:destroy,:showPayments]
 
   def index
