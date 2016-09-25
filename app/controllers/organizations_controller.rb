@@ -93,10 +93,11 @@ class OrganizationsController < ApplicationController
   # PATCH/PUT /organizations/1.json
   def update
     respond_to do |format|
-      if @organization.update(organization_params) && @organization.isApproved
+      @organization2 = @organization.update(organization_params)
+      if @organization2 && @organization.isApproved
         format.html { redirect_to @organization, notice: 'Organization was successfully updated.' }
         format.json { render :show, status: :ok, location: @organization }
-      elsif @organization.update(organization_params) && !@organization.isApproved
+      elsif @organization2 && !@organization.isApproved
           format.html { redirect_to root_url, notice: 'Waiting for admin approvement. We will contact you soon.' }
           format.json { render :show, status: :ok, location: @organization }
       else
