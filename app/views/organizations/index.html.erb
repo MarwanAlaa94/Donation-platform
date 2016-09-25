@@ -2,13 +2,13 @@
 
 <h1>Organizations</h1>
 
-
+<!--
     <%= form_tag organizations_path, :method =>'get' do %>
         <%= text_field_tag :search , params[:search] %>
         <%= submit_tag "Search in organizations names" %>
     <% end %>
     <%= link_to "Advanced Search" ,  new_organization_search_path %>
-
+-->
 
 
     <% @organizations.each do |organization| %>
@@ -22,8 +22,12 @@
         <div class="  alert alert-success" style="height:200px">
           <div class="row">
             <div class="col-lg-2">
-              <%= image_tag   organization.image.url(:thumb),
-              :class =>" img-circle fancybox"%>
+              <% if organization.image.exists? %>
+                <%= image_tag   organization.image.url(:thumb),
+                :class =>" img-circle fancybox"%>
+              <% else %>
+                <img class=" img-circle fancybox" src="/missing.png" width="100%" height="100%" alt="Missing">
+              <% end %>
             </div>
 
 
