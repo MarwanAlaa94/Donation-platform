@@ -29,6 +29,12 @@ class NeedsController < ApplicationController
       @need.need_images.build
   end
 
+  def deleteNeedImage
+    @image = NeedImage.find(params[:image_id])
+    @image.destroy
+    redirect_to organization_needs_path+"/"+params[:need_id].to_s+"/edit", notice: 'Image was successfully deleted.'
+  end
+
   def donate
    @need = Need.find(params[:need_id])
    @payment= @need.payments.build(org_id: @need.organization.id,

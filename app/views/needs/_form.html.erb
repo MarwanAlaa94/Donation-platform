@@ -56,6 +56,7 @@
           <%= builder.text_field :caption ,class: 'form-control'%>
           <%= builder.label :photo, "Edit Image File #{counter+1} " %>
           <%= builder.file_field :photo ,class: 'form-control' %>
+          <%= link_to "Delete Image", organization_need_delete_image_path(organization_id: need.organization.id, need_id: need.id, image_id: image.id),{:method => :delete,:remote=>true} %>
         </p>
         <% else %>
         <p>

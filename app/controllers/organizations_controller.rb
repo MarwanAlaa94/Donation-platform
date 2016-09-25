@@ -3,6 +3,7 @@ class OrganizationsController < ApplicationController
   before_action :logged_in_user, only: [:edit,:show]
   before_action :correct_user_org,   only: [:edit]
   before_action :correct_user_or_admin,   only: [:destroy]
+
   # GET /organizations
   # GET /organizations.json
   def index
@@ -67,6 +68,12 @@ class OrganizationsController < ApplicationController
 
   def editAndaddImages
     @organization.org_images.build
+  end
+
+  def deleteImage
+    @image = OrgImage.find(params[:image_id])
+    @image.destroy
+    redirect_to editImages_path, notice: 'Image was deleted successfully.'
   end
 
   # POST /organizations

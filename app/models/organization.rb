@@ -16,6 +16,9 @@ class Organization < ApplicationRecord
 		has_attached_file :image, styles: {small:"50x70>" ,medium: "300x300>", thumb: "100x100#" }
     validates_attachment_content_type :image, content_type: /\Aimage\/.*\z/
 
+
+
+
     def self.search(search)
     	if search
     		where(["org_name LIKE ?","%#{search}%"])

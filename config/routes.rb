@@ -13,6 +13,7 @@ Rails.application.routes.draw do
 
     post    'recieve/:id' => 'needs#recieve' , as: 'recieve_pay'
     post    'ignore/:id' => 'needs#ignore' , as: 'ignore_pay'
+    delete  'deleteImage/:image_id' => 'needs#deleteNeedImage' , as: 'delete_image'
   end
     collection do
     get    'notApproved' => 'organizations#notApproved' , as: 'notApproved'
@@ -34,6 +35,7 @@ Rails.application.routes.draw do
   post   '/login',   to: 'sessions#create'
   delete '/logout',  to: 'sessions#destroy'
   get '/organization/:id/editImages', to: 'organizations#editAndaddImages', as: 'editImages'
+  delete '/organization/:id/deleteImages/:id', to: 'organizations#deleteImage', as: 'deleteImage'
   get    '/donor/register',   to: 'users#new' 
   get    '/donor/login',   to: 'sessions#new_donor'
   post   '/donor/login',   to: 'sessions#create_donor'

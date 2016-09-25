@@ -10,6 +10,7 @@
       </ul>
     </div>
   <% end %>
+<p id="notice"><%= notice %></p>
 
   <div class="row">
     <div class="col-md-6 col-md-offset-3">
@@ -24,6 +25,7 @@
           <%= builder.text_field :caption ,class: 'form-control'%>
           <%= builder.label :photo, "Edit Image File #{counter+1} " %>
           <%= builder.file_field :photo ,class: 'form-control'%>
+          <%= link_to "Delete Image", deleteImage_path(id: @organization.id, image_id: image.id),{:method => :delete,:remote=>true} %>
         </p>
         <% else %>
         <p>
