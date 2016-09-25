@@ -1,32 +1,126 @@
 
   <% totalOfMoney=0 %>
-  <% if @lists.count !=0 %>
-  <%@lists.each do |list| %>
-  <% if list.count !=0 %>
-        <br>
-      <h3><strong> <u>Organization Name:</u> </strong>
-          <%=Organization.all.where(id: list[0].org_id)[0].org_name%>
-      </h3>
+<% if @lists[0].count !=0 %>
+<% @lists.sort%>
+<div class="kheir">
+<%@lists.each do |list| %>
+  <% list.sort_by{|e| e[e.created_at]} %>
+  <% list=list.reverse %>
+  <div class="container" >
+    <div class="panel panel-primary">
+      <div class="panel-heading">
 
-        <% total=0 %>
-    <%list.each do |payment| %>
+        <div class="row">
+          <div class="col-lg-7">
+            <h3 style="color:white;"><strong>
+            Organization Name: </strong>
+            <% org_name=Organization.all.where(id: list[0].org_id)[0].id%>
+          <%=Organization.all.where(id: list[0].org_id)[0].org_name%></h3>
+          </div>
+          <div class="col-lg-5">
+            <div class="btn-group" style="margin-top:0.3cm;">
+            <button  data-toggle="tab" href="#All<%=org_name%>" type="button" class="btn btn-primary">All
+               <span class="badge" style="color:white; background:#4169E1;"><%=list.count%></span></button>
+            <button data-toggle="tab" href="#Recieved<%=org_name%>" type="button" class="btn btn-primary">Recieved
+             <span class="badge" style="color:white; background:#4169E1;"><%=list.select{ |item| item[:is_recieved] ==true }.count%></span></button>
+            <button data-toggle="tab" href="#NotRecieved<%=org_name%>" type="button" class="btn btn-primary">Not Recieved
+             <span class="badge" style="color:white; background:#4169E1;"><%=list.select{ |item| item[:is_recieved] ==false }.count%></span></button>
+          </div>
+          </div>
+      </div>
+    </div>
+      <div class="panel-body"style=" width:100%" >
+        <div class="tab-content">
 
-        <strong> Need Name: </strong> <%= payment.need_name %> |
-        <strong> Money donated: </strong> <%= payment.donated_money%>
-        <strong> Time of Donation: </strong> <%= payment.created_at.strftime("%H:%M - %d %b. %Y") %>
-        <% if payment .is_recieved%>
-           |<strong style="color:green;"> Recieved </strong>
-        <%else%>
-          |<strong style="color:blue;"> Not recieved </strong>
-        <%end%>
-      <br>
-        <% total+=payment.donated_money %>
-        <% totalOfMoney+=payment.donated_money %>
-    <%end%>
+          <div id="All<%=org_name%>" class="tab-pane fade in active kheirTable" >
+            <table class="table table-hover" >
+              <thead>
+                <tr>
+                  <th>Need Name</th>
+                  <th>Money donated</th>
+                  <th>Time of Donation</th>
+                </tr>
+              </thead>
+                <tbody>
+                  <% total=0 %>
+                  <%list.each do |payment| %>
+                    <% if payment.is_recieved%>
+                      <tr class="success">
+                        <th><%= payment.need_name %> </th>
+                        <th><%= payment.donated_money.round%></th>
+                        <th><%= payment.created_at.strftime("%H:%M - %d %b. %Y") %></th>
+                        </tr>
+                        <% total+=payment.donated_money %>
+                          <% totalOfMoney+=payment.donated_money %>
+                    <%else%>
+                    <tr class="danger">
+                      <th><%= payment.need_name %> </th>
+                      <th><%= payment.donated_money.round%></th>
+                      <th><%= payment.created_at.strftime("%H:%M - %d %b. %Y") %></th>
+                      </tr>
+                    <%end%>
+                  <%end%>
+                    </tbody>
+                </table>
+          </div>
+          <div id="Recieved<%=org_name%>" class="tab-pane fade kheirTable"  >
+            <table class="table table-hover" >
+              <thead>
+                <tr>
+                  <th>Need Name</th>
+                  <th>Money donated</th>
+                  <th>Time of Donation</th>
+                </tr>
+              </thead>
+                <tbody>
+                  <%list.each do |payment| %>
+                    <% if payment.is_recieved%>
+                      <tr class="success">
+                        <th><%= payment.need_name %> </th>
+                        <th><%= payment.donated_money.round%></th>
+                        <th><%= payment.created_at.strftime("%H:%M - %d %b. %Y") %></th>
+                        </tr>
+                  <%end%>
+                  <%end%>
+                    </tbody>
+                </table>
+          </div>
+          <div id="NotRecieved<%=org_name%>" class="tab-pane fade kheirTable">
+            <table class="table table-hover" >
+              <thead>
+                <tr>
+                  <th>Need Name</th>
+                  <th>Money donated</th>
+                  <th>Time of Donation</th>
+                </tr>
+              </thead>
+                <tbody>
+                  <%list.each do |payment| %>
+                    <% if !payment.is_recieved%>
+                    <tr class="danger">
+                      <th><%= payment.need_name %> </th>
+                      <th><%= payment.donated_money.round%></th>
+                      <th><%= payment.created_at.strftime("%H:%M - %d %b. %Y") %></th>
+                      </tr>
+                    <%end%>
+                  <%end%>
+                    </tbody>
+                </table>
+          </div>
+        </div>
+  <div class="well" style="background-color: #a7c6eb; width:100%;" >
+    <h3><strong>Total Money donated to this Organization:</strong> <%= total.round%> LE</h3></div>
+    </div>
+  </div>
 
-        <br>
-        <h4><strong> Total Money donated to this Organization: </strong> <%= total%>  </h4>
-        <%end%>
-  <%end%>
-<h1>  <strong> The total of your donations: </strong> <%= totalOfMoney%></h1>
-<% end %>
+  </div>
+<%end%>
+</div>
+<div class="well danger" style="background-color: powderblue; width:100%;" >
+  <h1>  <strong> The total of your donations: </strong> <%= totalOfMoney.round%> LE</h1>
+</div>
+<% else %>
+<div class="well kheirWell"  >
+<h1>You haven't donated to any organization yet</h1>
+</div>
+<%end%>

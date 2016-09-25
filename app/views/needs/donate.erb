@@ -22,17 +22,16 @@
                     <p>
 
                       <%= payment.label :user_name, "Name: *" %>
-                      <%= payment.text_field :user_name , class: 'form-control' %>
+                      <%= payment.text_field :user_name, :required => true , class: 'form-control' %>
 
                       <%= payment.label :user_number, "Phone Number: *" %>
-                      <%= payment.text_field :user_number , class: 'form-control' %>
+                      <%= payment.text_field :user_number, :required => true , class: 'form-control' %>
 
                        <%= payment.label :user_address, "Address: *" %>
-                      <%= payment.text_field :user_address , class: 'form-control' %>
-
-
+                      <%= payment.text_field :user_address , :required => true, class: 'form-control' %>
+<%diff = @need.money- @need.donated_money%>
                       <%= payment.label :donated_money, "Donation amount of money(LE): *" %>
-                      <%= payment.number_field :donated_money ,class: 'form-control'  %>
+                      <%= payment.number_field :donated_money ,:min => 1 ,:max =>diff ,:required => true,class: 'form-control'  %>
 
                       <%= payment.label :comment, "Comment about the need:" %>
                       <%= payment.text_field :comment , class: 'form-control' %>
@@ -44,7 +43,7 @@
                       <%= payment.number_field :user_id ,type:"hidden",class: 'form-control'  %>
 
                       <%= payment.text_field :is_recieved  ,type:"hidden", class: 'form-control' %>
-                       
+
 
                     </p>
                     <%else%>

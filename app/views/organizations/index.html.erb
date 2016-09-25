@@ -2,32 +2,49 @@
 
 <h1>Organizations</h1>
 
-    <ul class="users">
+
     <%= form_tag organizations_path, :method =>'get' do %>
         <%= text_field_tag :search , params[:search] %>
         <%= submit_tag "Search in organizations names" %>
     <% end %>
     <%= link_to "Advanced Search" ,  new_organization_search_path %>
 
-    <%= will_paginate %>
+
+
     <% @organizations.each do |organization| %>
     <% if !current_organization?(organization)%>
-    <li>
-      <%= link_to organization do %>
+    <div class="row">
 
-      <div class="organization_temp">
-        <h3><%= image_tag   organization.image.url(:thumb)%></h3>
-        <h4><strong>Name:</strong</h4>
-        <strong> <%= organization.org_name %></strong>
-        <h4><strong>Website:</strong</h4>
-        <strong>  <%= organization.website_URL%></strong>
-      </div>
-      <%end%>
-      </li>
+        <div class="col-lg-2">
+        </div>
+        <div class="col-lg-8">
+        <%= link_to organization do %>
+        <div class="  alert alert-success" style="height:200px">
+          <div class="row">
+            <div class="col-lg-2">
+              <%= image_tag   organization.image.url(:thumb),
+              :class =>" img-circle fancybox"%>
+            </div>
+
+
+          <div class="col-lg-10"style = "text-align:center;" >
+          <strong>Name:</strong>
+          <em  style=" font-family: Sans-Serif;"> <%= organization.org_name %></em><br>
+          <strong>Website:</strong>
+          <em  style=" font-family: Sans-Serif;">  <%= organization.website_URL%></em><br>
+          <strong>Discription:</strong>
+
+          <em  style=" font-family: Sans-Serif;">  <%= organization.info%></em>
+        </div>
+
+          </div>
+          </div>
+          <%end%>
+        </div>
+
+  <div class="col-lg-2">
+  </div>
+
+</div>
       <%end%>
     <% end %>
-  </ul>
-
-    <%#= will_paginate %>
-
-<br>

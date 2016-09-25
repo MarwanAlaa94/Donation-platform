@@ -1,4 +1,4 @@
-body {
+ body {
       font: 400 15px/1.8 Lato, sans-serif;
 
       margin: 0;
@@ -52,8 +52,8 @@ margin-left: 0px
       height:400px;
   }
   .thumbnail-h{
-    height:550px;
-    width:500px;
+    height:12cm;
+    width:90%;
 
   }
   .thumbnail p {
@@ -110,4 +110,14 @@ margin-left: 0px
   overflow: auto;
   white-space: nowrap;
 
+}
+
+.kheir{
+  margin-top:2cm;height:auto;max-height:20cm;overflow:auto;overflow-y: scroll;
+}
+.kheirTable{
+  max-height: 10cm;overflow-y: scroll; width:100%
+}
+.kheirWell{
+  margin-top:3cm; border-radius: 20px;background-color: powderblue; width:100%;
 }
