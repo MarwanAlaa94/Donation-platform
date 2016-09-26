@@ -1,5 +1,8 @@
 <p id="notice"><%= notice %></p>
-
+<p>
+  <strong>Profile Image:</strong><br />
+    <%= image_tag @user.avatar.url, :size => "200x200", :crop => :fill %>
+</p>
 <p>
   <strong>User name:</strong>
   <%= @user.user_name %>
@@ -11,17 +14,8 @@
 </p>
 <p>
   <% if @user.avatar? %>
-  <p>
-    <strong>Image:</strong><br />
-      <%= image_tag @user.avatar.url, :size => "200x200", :crop => :fill %>
-  </p>
-<% end %>
-  <br><br>
-  <h1>
-<%= link_to 'My payments', user_showPayment_path(user_id: @user.id) %><br>
-<%= link_to 'My Kheir', user_myKheir_path(user_id: @user.id) %>
 
-</h1>
+<% end %>
 </p>
 
 

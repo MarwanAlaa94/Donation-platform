@@ -72,9 +72,15 @@
           </div>
           <div class="col-lg-4" >
           <% if current_organization?(@need.organization) %>
+              <% if @need.payments.select{ |item| item[:is_recieved] ==false }.count!=0 %>
             <%= link_to organization_need_needPayments_path(need_id: @need.id) do %>
             <p class="btn btn-default btn-lg" style="font-size:160%; width:60%;border-radius: 15px; margin-top:1.3cm;">
-            <i class="fa fa-usd"></i>  Payments</p>
+            <i class="fa fa-usd"></i>  Payments
+          <span class="badge" style="color:white; background:#5D6970; border-radius:10mm;"> new: <%=@need.payments.select{ |item| item[:is_recieved] ==false }.count%></span></p>
+            <% end %>
+            <% else %>
+            <p class="btn btn-default btn-lg" style="font-size:160%; width:60%;border-radius: 15px; margin-top:1.3cm;">
+            <i class="fa fa-usd"> </i> No new payments</p>
             <% end %>
             <% end %>
             </div>
@@ -176,12 +182,12 @@
 <%end%>
 <% if donor_logged_in? %>
 <%=  link_to organization_need_donation_path( @need.organization , @need) do %>
-<p class="btn btn-success btn-lg" style="font-size:160%; width:12%;border-radius: 15px;float:right;margin-top:1.1cm;">
+<p class="btn btn-success btn-lg" style="font-size:160%;border-radius: 15px;float:right;margin-top:1.1cm;">
       <i class="fa fa-money"></i> Donate</p>
   <% end %>
 <%end%>
 <%=  link_to organization_needs_path do %>
-<p class="btn btn-info btn-lg" style="font-size:160%; width:12%;border-radius: 15px;margin-top:1.3cm;">
-   <i class="fa fa-angle-left"></i>   Other needs</p>
+<p class="btn btn-info btn-lg" style="font-size:160%;border-radius: 15px;margin-top:1.3cm;">
+   <i class="fa fa-angle-left"></i> Other needs</p>
   <% end %>
   </div>

@@ -52,6 +52,8 @@ class NeedsController < ApplicationController
 
       end
     @payment.need.save
+
+    redirect_to organization_need_needPayments_path(need_id: @payment.need.id), notice: 'Payment has been recieved successfully'
   end
 
   def ignore
@@ -59,7 +61,7 @@ class NeedsController < ApplicationController
    user= User.find(@payment.user_id)
    @need.send_payment_ignorance_mail(user,@payment)
    @payment.destroy
-   redirect_to organization_need_needPayments_path, notice: 'Payment was ignored successfully'
+   redirect_to organization_need_needPayments_path, notice: 'Payment has been ignored successfully'
  end
 
   def create

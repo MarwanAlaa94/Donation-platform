@@ -5,7 +5,7 @@
 		user = User.find_by(email: params[:session][:email].downcase)
 		if user && user.authenticate(params[:session][:password]) && user.isAdmin == false
 			donor_log_in user
-			redirect_to user
+			redirect_to organizations_path
 		elsif user && user.authenticate(params[:session][:password]) && user.isAdmin == true
 			admin_log_in user
 			redirect_to admin_home_path
