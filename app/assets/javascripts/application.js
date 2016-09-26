@@ -15,3 +15,16 @@
 //= require turbolinks
 
 //=require bootstrap
+
+
+var i = 0;
+
+
+function duplicate() {
+	var images = document.getElementById("images");
+	var original = document.getElementById('image');
+    var clone = original.cloneNode(true); // "deep" clone
+    clone.id = "image" + ++i;
+    // or clone.id = ""; if the divs don't need an ID
+    images.appendChild(clone);
+}

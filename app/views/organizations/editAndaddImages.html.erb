@@ -28,12 +28,16 @@
           <%= link_to "Delete Image", deleteImage_path(id: @organization.id, image_id: image.id),{:method => :delete,:remote=>true} %>
         </p>
         <% else %>
-        <p>
-          <%= builder.label :caption, "New Image Caption" %>
-          <%= builder.text_field :caption,class: 'form-control' %>
-          <%= builder.label :photo, "New Image File" %>
-          <%= builder.file_field :photo,class: 'form-control' %>
-        </p>
+        <div id = "images">
+          <p id="image">
+            <%= builder.label :caption, "New Image Caption" %>
+            <%= builder.text_field :caption,class: 'form-control' %>
+            <%= builder.label :photo, "New Image File" %>
+            <%= builder.file_field :photo,class: 'form-control' %>
+          </p>
+        </div>
+        <button type="button"class: "btn btn-primary" onclick="duplicate();">Add Another Image</button>
+        
         <% end %>
         <% counter=counter+1 %>
     <% end %>
