@@ -17,8 +17,13 @@ class NeedsController < ApplicationController
   end
 
   def showPayments
-    @need = Need.find(params[:need_id])
-  end
+     @need = Need.find(params[:need_id])
+     recommended_payments_ids = recommend_payments
+     @recommended_payments= Array.new
+     recommended_payments_ids.each do |index|
+      @recommended_payments.push(Payment.find(index))
+    end
+   end
 
 
   def new
@@ -110,5 +115,26 @@ end
          payments_attributes:[:comment ,:need_name, :donated_money, :user_id, :org_id ,
           :id , :is_recieved , :user_name , :user_address , :user_number])
 
-      end
+    end
+    def recommend_payments
+         recommended_payments_ids= Array.new 
+         array1 = @need.payments.pluck(:id)
+         array2 = @need.payments.pluck(:donated_money)
+         close_payments_cominations= Array.new
+         close_sum =  (@need.money - @need.donated_money) + (0.1* @need.money )
+         (1..array2.count).each do |len|
+            array2.combination(len).each_with_index do |comb, index|
+               sum = comb.inject(:+)
+               if sum == (@need.money - @need.donated_money)
+                   return recommended_payments_ids=array1.combination(len).to_a[index]
+               elsif (sum > (@need.money - @need.donated_money) && sum < close_sum )
+                  close_payments_cominations = comb
+                  close_sum = sum
+                   recommended_payments_ids=array1.combination(len).to_a[index]
+               end
+               
+            end
+         end
+         return recommended_payments_ids
+     end
 end
