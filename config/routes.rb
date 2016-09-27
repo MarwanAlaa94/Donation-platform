@@ -1,9 +1,6 @@
 Rails.application.routes.draw do
 
   get 'admin/home'
-
-
-  
   resources :messages
   resources :organizations do
     get '/needs/:id/addImage', to: 'needs#addImage', as: 'addImage'
@@ -17,6 +14,8 @@ Rails.application.routes.draw do
   end
     collection do
     get    'notApproved' => 'organizations#notApproved' , as: 'notApproved'
+    get    'homePage' => 'organizations#homePage' , as: 'homePage'
+
     get    'showNotApproved/:id' => 'organizations#showNotApproved' , as: 'showNotApproved'
     post    'approveOrg/:id' => 'organizations#approveOrg' , as: 'approveOrg'
     delete  'disapproveOrg/:id' => 'organizations#disapproveOrg' , as: 'disapproveOrg'
@@ -36,7 +35,7 @@ Rails.application.routes.draw do
   delete '/logout',  to: 'sessions#destroy'
   get '/organization/:id/editImages', to: 'organizations#editAndaddImages', as: 'editImages'
   delete '/organization/:id/deleteImages/:id', to: 'organizations#deleteImage', as: 'deleteImage'
-  get    '/donor/register',   to: 'users#new' 
+  get    '/donor/register',   to: 'users#new'
   get    '/donor/login',   to: 'sessions#new_donor'
   post   '/donor/login',   to: 'sessions#create_donor'
   delete '/donor/logout',  to: 'sessions#destroy_donor'

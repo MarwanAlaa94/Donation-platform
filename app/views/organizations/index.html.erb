@@ -20,8 +20,9 @@
         <div class="col-lg-8">
         <%= link_to organization do %>
         <div class="  alert alert-success" style="height:200px">
-          <div class="row">
-            <div class="col-lg-2">
+          <div class="row" style = "max-height:180px ;overflow-y: scroll; ">
+
+            <div class="col-lg-2  ">
               <% if organization.image.exists? %>
                 <%= image_tag   organization.image.url(:thumb),
                 :class =>" img-circle fancybox"%>
@@ -31,7 +32,7 @@
             </div>
 
 
-          <div class="col-lg-10"style = "text-align:center;" >
+          <div class="col-lg-10 "style = "text-align:center; " >
           <strong>
           <em  style=" font-family: Sans-Serif;"> <%= organization.org_name %></em><br>
           </strong>
@@ -39,9 +40,10 @@
           <em  style=" font-family: Sans-Serif;">  <%= organization.email%></em><br>
           <strong>Website:</strong>
           <em  style=" font-family: Sans-Serif;">  <%= organization.website_URL%></em><br>
-          <strong>Information:</strong>
-
+          <strong>Information:</strong><br>
           <em  style=" font-family: Sans-Serif;">  <%= organization.info%></em>
+
+
         </div>
 
           </div>
