@@ -43,6 +43,21 @@ function addImageDiv(c){
 	images.appendChild(div);
 }
 
+function addNeedImageDiv(c){
+
+    var images = document.getElementById("images");
+    var div = document.createElement('div');
+	div.id = "image" + ++c;
+
+	div.innerHTML = '<label for="need_need_images_attributes_'+c+'_caption">New Image Caption: *</label>'
+           + '<input required="required" class="form-control" type="text" name="need[need_images_attributes]['+c+'][caption]" id="need_need_images_attributes_'+c+'_caption">'
+           + '<label for="need_need_images_attributes_'+c+'_photo">New Image File: *</label>'
+           + '<input class="form-control" required="required" type="file" name="need[need_images_attributes]['+c+'][photo]" id="need_need_images_attributes_'+c+'_photo">';
+
+	images.appendChild(div);
+}
+
+
 function remove(id, url) {
 	var el = document.getElementById( id);
 	el.parentNode.removeChild( el );
