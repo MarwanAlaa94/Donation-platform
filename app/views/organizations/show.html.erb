@@ -50,158 +50,192 @@
       </div>
 
 
-    <%  if @needs.count != 0 %>
-      <div id="myCarousel2" class="carousel slide " data-ride="carousel" style="margin-left: -1.1cm;margin-right: -1.1cm;">
+      <%  if @needs.count != 0 %>
+        <div id="myCarousel2" class="carousel slide " data-ride="carousel" style="margin-left: -1.1cm;margin-right: -1.1cm;">
 
-   <!-- Wrapper for slides -->
-    <h1 class="text-center" style="font-size: 50px;"><%= link_to 'Needs',organization_needs_path(@organization) %></h1>
-   <div class="carousel-inner" style=" background-color:#ff5549; width:100%;" role="listbox">
-     <div class="item active">
-       <div class="row text-center">
-         <%i =0 %>
-      <% count=@needs.count %>
-      <% if count > 3 %>
-      <% count=3 %>
-      <% end %>
-       <% count.times do  %>
-        <div class="col-sm-4">
-          <div class="thumbnail thumbnail-h">
-            <%= link_to organization_need_path(params[:id],@needs[i]) do %>
-            <div style="left-margin:10px">
-                <%= image_tag @needs[i].need_images[0].photo.url(),:style => "width:100%; height:7cm ;"%>
-                <p><strong><%= @needs[i].title%></strong></p>
-                <% s=@needs[i].description %>
-                <% if s.length > 150 %>
-                <% s=s[0..150]+"..." %>
+     <!-- Wrapper for slides -->
+      <h1 class="text-center" style="font-size: 50px;"><%= link_to 'Needs',organization_needs_path(@organization) %></h1>
+     <div class="carousel-inner" style=" background-color:#99ccff; width:100%;" role="listbox">
+       <div class="item active">
+         <div class="row text-center">
+           <%i =0 %>
+        <% count=@needs.count %>
+        <% if count > 3 %>
+        <% count=3 %>
+        <% end %>
+         <% count.times do  %>
+          <div class="col-sm-4">
+            <div class="thumbnail thumbnail-h">
+              <%= link_to organization_need_path(params[:id],@needs[i]) do %>
+              <div style="left-margin:10px">
+
+
+                   <% if @needs[i].need_images[0]!=nil %>
+                     <%= image_tag  @needs[i].need_images[0].photo.url(),
+                     :style => "width:100%; height:7cm ;"%>
+                   <% else %>
+                   <img  src="/missing.png" width="100%" height="264" alt="Missing">
+                   <% end %>
+                  <p><strong><%= @needs[i].title%></strong></p>
+                  <% s=@needs[i].description %>
+                  <% if s.length > 150 %>
+                  <% s=s[0..150]+"..." %>
+                </div>
+              <%end%>
+              <p><%= s %></p>
               </div>
-            <%end%>
-            <p><%= s %></p>
             </div>
-          </div>
-       <%i+=1 %>
-       <% end %>
+         <%i+=1 %>
+         <% end %>
+         <% end %>
+       </div>
+     </div>
+       <%i =3 %>
+       <% while @needs.count-i >0 do  %>
+               <div class="item">
+                 <div class="row text-center">
+                   <%j =0 %>
+                <% count=@needs.count-i %>
+                <% if count > 3 %>
+                <% count=3 %>
+                <% end %>
+                 <% count.times do  %>
+                  <div class="col-sm-4">
+                    <div class="thumbnail thumbnail-h">
+                      <%= link_to organization_need_path(params[:id],@needs[i]) do %>
+
+
+                      <% if @needs[i+j].need_images[0]!=nil %>
+                        <%= image_tag  @needs[i+j].need_images[0].photo.url(:thumb),
+                        :style => "width:100%; height:7cm ;"%>
+                      <% else %>
+                      <img  src="/missing.png" width="100%" height="264" alt="Missing">
+                      <% end %>
+
+                      <p><strong><%= @needs[i+j].title%></strong></p>
+                      <% s=@needs[i+j].description %>
+                      <% if s.length > 72 %>
+                      <% s=s[0..72]+"..." %>
+                      <%end%>
+                      <p><%= s %></p>
+                      </div>
+                    </div>
+                 <%j+=1 %>
+                 <% end %>
+                 <% end %>
+               </div>
+             </div>
+       <%i+=3 %>
        <% end %>
      </div>
+
+
+     <!-- Left and right controls -->
+     <a class="left carousel-control" href="#myCarousel2" role="button" data-slide="prev">
+       <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+       <span class="sr-only">Previous</span>
+     </a>
+     <a class="right carousel-control" href="#myCarousel2" role="button" data-slide="next">
+       <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+       <span class="sr-only">Next</span>
+     </a>
    </div>
-     <%i =3 %>
-     <% while @needs.count-i >0 do  %>
-             <div class="item">
-               <div class="row text-center">
-                 <%j =0 %>
-              <% count=@needs.count-i %>
-              <% if count > 3 %>
-              <% count=3 %>
-              <% end %>
-               <% count.times do  %>
-                <div class="col-sm-4">
-                  <div class="thumbnail thumbnail-h">
-                    <%= link_to organization_need_path(params[:id],@needs[i]) do %>
-                  <%= image_tag @needs[i+j].need_images[0].photo.url()%>
-                    <p><strong><%= @needs[i+j].title%></strong></p>
-                    <% s=@needs[i+j].description %>
-                    <% if s.length > 72 %>
-                    <% s=s[0..72]+"..." %>
-                    <%end%>
-                    <p><%= s %></p>
-                    </div>
-                  </div>
-               <%j+=1 %>
-               <% end %>
-               <% end %>
-             </div>
-           </div>
-     <%i+=3 %>
-     <% end %>
    </div>
+      <%end%>
 
 
-   <!-- Left and right controls -->
-   <a class="left carousel-control" href="#myCarousel2" role="button" data-slide="prev">
-     <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-     <span class="sr-only">Previous</span>
-   </a>
-   <a class="right carousel-control" href="#myCarousel2" role="button" data-slide="next">
-     <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-     <span class="sr-only">Next</span>
-   </a>
- </div>
- </div>
-    <%end%>
+      <%  if @achievments.count != 0 %>
+        <div id="myCarousel2" class="carousel slide " data-ride="carousel" style="margin-left: -1.1cm;margin-right: -1.1cm;">
+
+     <!-- Wrapper for slides -->
+      <h1 class="text-center" style="font-size: 50px;"><%= link_to 'Achievments',organization_Achievements_path(@organization) %></h1>
+     <div class="carousel-inner" style=" background-color:#0080ff; width:100%;" role="listbox">
+       <div class="item active">
+         <div class="row text-center">
+           <%i =0 %>
+        <% count=@achievments.count %>
+        <% if count > 3 %>
+        <% count=3 %>
+        <% end %>
+         <% count.times do  %>
+          <div class="col-sm-4">
+            <div class="thumbnail thumbnail-h">
+              <%= link_to organization_need_path(params[:id],@achievments[i]) do %>
+              <div style="left-margin:10px">
 
 
-    <%  if @achievments.count != 0 %>
-    <div id="myCarousel3" class="carousel slide " data-ride="carousel">
-    <!-- Wrapper for slides -->
-     <h1 class="text-center" style="font-size: 50px;"><%= link_to 'Achievements',organization_Achievements_path(@organization) %></h1>
-    <div class="carousel-inner" style=" background-color:#61bc84; width:100%;" role="listbox">
-     <div class="item active">
-       <div class="row text-center">
-         <%i =0 %>
-      <% count=@achievments.count %>
-      <% if count > 3 %>
-      <% count=3 %>
-      <% end %>
-       <% count.times do  %>
-        <div class="col-sm-4">
-          <div class="thumbnail thumbnail-h">
-            <%= link_to organization_need_path(params[:id],@achievments[i]) do %>
-            <%= image_tag @achievments[i].need_images[0].photo.url()%>
-            <p><strong><%= @achievments[i].title%></strong></p>
-            <% s=@achievments[i].description %>
-            <% if s.length > 150 %>
-            <% s=s[0..150]+"..." %>
-            <%end%>
-            <p><%= s %></p>
+                   <% if @achievments[i].need_images[0]!=nil %>
+                     <%= image_tag  @achievments[i].need_images[0].photo.url(),
+                     :style => "width:100%; height:7cm ;"%>
+                   <% else %>
+                   <img  src="/missing.png" width="100%" height="264" alt="Missing">
+                   <% end %>
+                  <p><strong><%= @achievments[i].title%></strong></p>
+                  <% s=@achievments[i].description %>
+                  <% if s.length > 150 %>
+                  <% s=s[0..150]+"..." %>
+                </div>
+              <%end%>
+              <p><%= s %></p>
+              </div>
             </div>
-          </div>
-       <%i+=1 %>
-       <% end %>
+         <%i+=1 %>
+         <% end %>
+         <% end %>
+       </div>
+     </div>
+       <%i =3 %>
+       <% while @achievments.count-i >0 do  %>
+               <div class="item">
+                 <div class="row text-center">
+                   <%j =0 %>
+                <% count=@achievments.count-i %>
+                <% if count > 3 %>
+                <% count=3 %>
+                <% end %>
+                 <% count.times do  %>
+                  <div class="col-sm-4">
+                    <div class="thumbnail thumbnail-h">
+                      <%= link_to organization_need_path(params[:id],@achievments[i]) do %>
+
+
+                      <% if @achievments[i+j].need_images[0]!=nil %>
+                        <%= image_tag  @achievments[i+j].need_images[0].photo.url(:thumb),
+                        :style => "width:100%; height:7cm ;"%>
+                      <% else %>
+                      <img  src="/missing.png" width="100%" height="264" alt="Missing">
+                      <% end %>
+
+                      <p><strong><%= @achievments[i+j].title%></strong></p>
+                      <% s=@achievments[i+j].description %>
+                      <% if s.length > 72 %>
+                      <% s=s[0..72]+"..." %>
+                      <%end%>
+                      <p><%= s %></p>
+                      </div>
+                    </div>
+                 <%j+=1 %>
+                 <% end %>
+                 <% end %>
+               </div>
+             </div>
+       <%i+=3 %>
        <% end %>
      </div>
-    </div>
-     <%i =3 %>
-     <% while @achievments.count-i >0 do  %>
-             <div class="item">
-               <div class="row text-center">
-                 <%j =0 %>
-              <% count=@achievments.count-i %>
-              <% if count > 3 %>
-              <% count=3 %>
-              <% end %>
-               <% count.times do  %>
-                <div class="col-sm-4">
-                  <div class="thumbnail thumbnail-h">
-                    <%= link_to organization_need_path(params[:id],@achievments[i]) do %>
-                    <%= image_tag @achievments[i+j].need_images[0].photo.url()%>
-                    <p><strong><%= @achievments[i+j].title%></strong></p>
-                    <% s= @achievments[i+j].description %>
-                    <% if s.length > 72 %>
-                    <% s=s[0..72]+"..." %>
-                    <%end%>
-                    <p><%= s %></p>
-                    </div>
-                  </div>
-               <%j+=1 %>
-               <% end %>
-               <% end %>
-             </div>
-           </div>
-     <%i+=3 %>
-     <% end %>
-    </div>
-    <!-- Left and right controls -->
-    <a class="left carousel-control" href="#myCarousel3" role="button" data-slide="prev">
-     <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-     <span class="sr-only">Previous</span>
-    </a>
-    <a class="right carousel-control" href="#myCarousel3" role="button" data-slide="next">
-     <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-     <span class="sr-only">Next</span>
-    </a>
-    </div>
-    </div>
 
-    <%end%>
+
+     <!-- Left and right controls -->
+     <a class="left carousel-control" href="#myCarousel2" role="button" data-slide="prev">
+       <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+       <span class="sr-only">Previous</span>
+     </a>
+     <a class="right carousel-control" href="#myCarousel2" role="button" data-slide="next">
+       <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+       <span class="sr-only">Next</span>
+     </a>
+    </div>
+    </div>
+      <%end%>
 
       <% if admin_logged_in?%>
         <h1><%= link_to 'Delete Profile', @organization, method: :delete, data: { confirm: 'Are you sure?' } %></h1>
