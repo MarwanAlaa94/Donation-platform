@@ -73,7 +73,8 @@ class OrganizationsController < ApplicationController
   def deleteImage
     @image = OrgImage.find(params[:image_id])
     @image.destroy
-    redirect_to editImages_path, notice: 'Image was deleted successfully.'
+    
+   # redirect_to editImages_path, notice: 'Image was deleted successfully.'
   end
 
   # POST /organizations

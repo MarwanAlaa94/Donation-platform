@@ -12,31 +12,33 @@
   <% end %>
 <p id="notice"><%= notice %></p>
 
-  <div class="row">
+  <div class="row" id="hamada">
     <div class="col-md-6 col-md-offset-3">
     <h1>Edit images</h1>
     <% counter=0 %>
     <%= f.fields_for :org_images do |builder| %>
         <% if counter != @organization.org_images.count %>
-        <p>
+        <div id ="<%= counter+1%>">
           <%image =@organization.org_images[counter]%>
           <%= image_tag  image.photo.url(:medium)%>
           <%= builder.label :caption, "Edit Image #{counter+1}" %>
           <%= builder.text_field :caption , :required => true,class: 'form-control'%>
           <%= builder.label :photo, "Edit Image File #{counter+1} " %>
           <%= builder.file_field :photo ,class: 'form-control'%>
-          <%= link_to "Delete Image", deleteImage_path(id: @organization.id, image_id: image.id),{:method => :delete,:remote=>true} %>
-        </p>
+          <%= link_to "Delete Image", deleteImage_path(id: @organization.id, image_id: image.id),{:method => :delete,:remote=>true, :onclick => "remove('#{counter+1}', '#{editImages_path}');"} %>
+        </div>
         <% else %>
         <div id = "images">
-          <p id="image">
-            <%= builder.label :caption, "New Image Caption" %>
+          <div id="image">
+            <%= builder.label :caption, "New Image Caption: *" %>
             <%= builder.text_field :caption, :required => true,class: 'form-control' %>
-            <%= builder.label :photo, "New Image File" %>
+            <%= builder.label :photo, "New Image File: *" %>
             <%= builder.file_field :photo,class: 'form-control', :required => true %>
-          </p>
+            <%#= link_to "Delete", :onclick => 'remove("image");' %>
+          </div>
+
         </div>
-        <button type="button"class: "btn btn-primary" onclick="duplicate();">Add Another Image</button> 
+        <button type="button",class: "btn btn-primary" onclick="addImageDiv(<%= counter %>);">Add Another Image</button> 
 
         <% end %>
         <% counter=counter+1 %>

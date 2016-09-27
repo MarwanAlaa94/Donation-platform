@@ -1,12 +1,19 @@
 <p id="notice"><%= notice %></p>
 <% payments=@need.payments.select{ |item| item[:is_recieved] ==false } %>
+<% counter = 0 %>
 <% payments.each do |pay| %>
+   <div id="<%= counter+1%>">
       <strong>User name </strong><%=pay.user_name%>|<strong>Donated money </strong><%=pay.donated_money%>|<strong>User number </strong><%=pay.user_number%>|<strong>User address </strong><%=pay.user_address%>
       <strong>Comment </strong><%=pay.comment%>
-      <div style="width:10%;">
-      <%= button_to 'Recieve', organization_need_recieve_pay_path(@need.organization ,id: @need.id, payment_id:  pay.id) ,method: :post, class: "btn btn-primary" %>
-      <%= button_to 'Ignore', organization_need_ignore_pay_path(@need.organization ,id: @need.id, payment_id:  pay.id) ,method: :post, class: "btn btn-primary" %>
-</div>
       <br>
+      <div style="margin-left:0px;" class="col-md-3 col-md-offset-3">
+	      <%= button_to 'Recieve', organization_need_recieve_pay_path(@need.organization ,id: @need.id, payment_id:  pay.id) ,:method => :post, :onclick => "removeAndAlert('#{counter+1}', 'Payment has been recieved successfully');", class: "btn btn-primary" %>
+	  </div>
 
+	  <div  class="col-md-3 col-md-offset-3">
+      	<%= button_to 'Ignore', organization_need_ignore_pay_path(@need.organization ,id: @need.id, payment_id:  pay.id) ,method: :post, :onclick => "removeAndAlert('#{counter+1}', 'Payment has been ignored successfully');", class: "btn btn-primary" %>
+      </div>
+      <br><br><br>
+  </div>
+<% counter=counter+1 %>
   <%end%>

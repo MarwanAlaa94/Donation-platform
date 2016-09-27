@@ -34,7 +34,11 @@
               </li>
           <% end %>
           <% if logged_in? %>
-          <li style="padding:5px 0 5px 5px;"><%= image_tag @current_organization.image.url(), :size => "40x40", :crop => :fill %></li>
+            <% if @current_organization.image? %>
+              <li style="padding:5px 0 5px 5px;"><%= image_tag @current_organization.image.url(), :size => "40x40", :crop => :fill %></li>
+            <% else %>
+              <li style="padding:5px 0 5px 5px;"><img src="/user_missing.png" width="40" height="40" alt="Missing"></li>
+            <% end %>
             <li><%= link_to @current_organization.org_name, @current_organization %></li>
             <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
@@ -57,6 +61,8 @@
           <% elsif donor_logged_in? %>
             <% if current_user.avatar? %>
               <li style="padding:5px 0 5px 5px;"><%= image_tag current_user.avatar.url, :size => "40x40", :crop => :fill %></li>
+            <% else %>
+              <li style="padding:5px 0 5px 5px;"><img src="/user_missing.png" width="40" height="40" alt="Missing"></li>
             <% end %>
               <li style="font-family: Lobster; font-size:140%;"> <%=  link_to current_user.user_name ,current_user%></li>
               <li style="font-family: Lobster; font-size:140%;"> <%= link_to "My payments",user_myKheir_path(user_id:current_user.id)%></li>
@@ -78,6 +84,8 @@
           <% elsif admin_logged_in? %>
             <% if current_admin.avatar? %>
               <li style="padding:5px 0 5px 5px;"><%= image_tag current_admin.avatar.url, :size => "40x40", :crop => :fill %></li>
+            <% else %>
+              <li style="padding:5px 0 5px 5px;"><img src="/user_missing.png" width="40" height="40" alt="Missing"></li>
             <% end %>
               <li style="font-family: Lobster; font-size:20px;"> <%= link_to current_admin.user_name, current_admin %></li>
 
