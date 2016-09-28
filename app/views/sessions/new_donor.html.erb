@@ -23,8 +23,9 @@
 		  <% if !current_user %>
 
 		  	<p style="text-align:center;">New Donor? <%= link_to "Sign up !", donor_register_path %></p>
+        <p style="text-align:center;">Organization? <%= link_to "sign in as an organization", login_path %></p>
 		    <div id="user-widget">
-		    <a href="/auth/facebook" style = "margin-left:33%;color:white;" class="btn btn-facebook">
+		    <a href="/auth/facebook" style = "margin-left:37%;color:white;" class="btn btn-facebook" style="text-align:center;">
 								<i class="fa fa-facebook"></i> |
 								Sign in with Facebook
 							</a>

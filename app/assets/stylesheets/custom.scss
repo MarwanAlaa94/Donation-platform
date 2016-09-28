@@ -69,13 +69,7 @@ p {
   box-sizing:         border-box;
 }
 
-.debug_dump {
-  clear: both;
-  float: left;
-  width: 100%;
-  margin-top: 45px;
-  @include box_sizing;
-}
+
 /* this for adjusting the debug mode */
 #logo {
   float: left;
@@ -95,8 +89,8 @@ p {
 /* footer */
 
 footer {
-  margin-top: 45px;
-  padding-top: 5px;
+  margin-top: 2cm;
+  margin-left:-1cm;
   border-top: 1px solid $gray-medium-light;
   color: $gray-light;
   a {
@@ -243,13 +237,14 @@ margin: 0;
 
 }
 .submit {
-border-radius: 5px;
 display: inline-block;
 font-size: 1em;
 font-color: 5em;
 margin: 0;
 width: 65%;
 padding-left: 33%;
+margin-top: 1.5cm;
+border-radius: 50px;
 
 
 }
@@ -285,3 +280,19 @@ word-wrap: break-word;
  .logo {
      font-size: 200px;
  }
+
+ .homescreen{
+   width: 105%;
+   -webkit-background-size: cover;
+   -moz-background-size: cover;
+   -o-background-size: cover;
+   background-size: cover;
+   background-size: 100% 100%;
+   background-repeat: no-repeat;
+   background-position: center center;
+   height: 12cm;
+   margin-left: -1cm;
+   margin-top: -0.5cm;
+
+ }
+ 

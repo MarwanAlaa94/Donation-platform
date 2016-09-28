@@ -49,7 +49,8 @@ class UsersController < ApplicationController
   end
 
   def myKheir
-
+    @user = User.find(params[:user_id])
+    redirect_to(organizations_path) if !current_user?(@user)
    @user = User.find(params[:user_id])
     @payments = @user.payments
     @payments1 = @payments.sort_by &:org_id
@@ -88,7 +89,7 @@ class UsersController < ApplicationController
         @user.send_admin_mail
         session[:user_id]=@user.id
         # Tell the UserMailer to send a welcome Email after save
-        format.html { redirect_to @user, notice: 'Donor was successfully created.' }
+        format.html { redirect_to organizations_path, notice: 'Donor was successfully created.' }
         format.json { render :show, status: :created, location: @user }
       else
         format.html { render :new }

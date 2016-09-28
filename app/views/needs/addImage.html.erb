@@ -27,8 +27,15 @@
 
 
 
+
+
+
 <div class="submit">
   <%= f.submit "Add", class: "btn btn-primary" %>
+  <%=  link_to organization_path( @need.organization) do %>
+  <h5 >
+        skip>></h5>
+    <% end %>
 </div>
 
 <% end %>

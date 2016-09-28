@@ -83,7 +83,7 @@ end
   def update
     respond_to do |format|
       if @need.update(need_params)
-        format.html { redirect_to [@need.organization, @need], notice: 'Need was successfully updated.' }
+        format.html { redirect_to [@need.organization, @need] }
         format.json { render :show, status: :ok, location: @need }
       else
         format.html { render :edit }
@@ -117,7 +117,7 @@ end
 
     end
     def recommend_payments
-         recommended_payments_ids= Array.new 
+         recommended_payments_ids= Array.new
          array1 = @need.payments.pluck(:id)
          array2 = @need.payments.pluck(:donated_money)
          close_payments_cominations= Array.new
@@ -132,7 +132,7 @@ end
                   close_sum = sum
                    recommended_payments_ids=array1.combination(len).to_a[index]
                end
-               
+
             end
          end
          return recommended_payments_ids

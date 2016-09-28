@@ -9,8 +9,7 @@
           <div class="item active">
             <%= image_tag @need.need_images[0].photo.url()%>
             <div class="carousel-caption">
-              <h3> <%= @need.need_images[0].caption  %></h3>
-              <p>The atmosphere in Chania has a touch of Florence and Venice.</p>
+              <h4> <%= @need.need_images[0].caption  %></h4>
             </div>
           </div>
           <%i =1 %>
@@ -18,8 +17,7 @@
           <div class="item">
             <%= image_tag @need.need_images[i].photo.url()%>
             <div class="carousel-caption">
-              <h3><%=  @need.need_images[i].caption %></h3>
-              <p>The atmosphere in Chania has a touch of Florence and Venice.</p>
+              <h4><%=  @need.need_images[i].caption %></h4>
             </div>
           </div>
           <%i+=1 %>
@@ -123,7 +121,7 @@
         <section class="user_info" style= "display:inline;">
         <div id="band" class="container" style= "display:inline;">
           <h3>Started At:</h3>
-          <p style="font-size:160%;"><em> <%= @need.start_date %></em></p>
+          <p style="font-size:160%;"><em><%= @need.created_at.strftime("%d %b. %Y") %></em></p>
           </div>
         </section>
         </div>
@@ -131,7 +129,7 @@
           <section class="user_info" style= "display:inline;">
           <div id="band" class="container" style= "display:inline;">
             <h3>Due date:</h3>
-            <p style="font-size:160%;"><em> <%= @need.end_date %></em></p>
+            <p style="font-size:160%;"><em> <%= @need.end_date.strftime("%d %b. %Y")  %></em></p>
             </div>
           </section>
           </div>
@@ -164,30 +162,23 @@
 <p>
 
 </p>
-<% if current_organization?(@need.organization) %>
-<div class="container-fluid test">
-  <button type="button" class="btn btn-info"style="font-size:160%; width:20%;border-radius: 10px;float:right; margin-top:1.3cm;"
-  data-toggle="collapse" data-target="#edit"> Modify the need</button>
-  <div id="edit" class="collapse">
-      <%=  link_to organization_needs_path+"/"+@need.id.to_s+"/edit" do %>
-      <p class="btn btn-default btn-lg" style="font-size:160%; width:10%;border-radius: 15px; float:right;margin-top:1.3cm;">
-      <span class="glyphicon glyphicon-cog"></span>  Edit</p>
-        <% end %>
-        <%= link_to organization_needs_path+"/"+@need.id.to_s ,  data: { confirm: 'Are you sure?' } do %>
-        <p class="btn btn-danger btn-lg"  style="font-size:160%; width:10%;border-radius: 15px;float:right; margin-top:1.3cm;">
-          Delete </p>
-          <% end %>
-  </div>
 
-<%end%>
+<%if !@need.achievment_flag %>
 <% if donor_logged_in? %>
+
 <%=  link_to organization_need_donation_path( @need.organization , @need) do %>
 <p class="btn btn-success btn-lg" style="font-size:160%;border-radius: 15px;float:right;margin-top:1.1cm;">
       <i class="fa fa-money"></i> Donate</p>
   <% end %>
+  <%elsif logged_in?%>
+  <%=  link_to organization_needs_path+"/"+@need.id.to_s+"/edit" do %>
+  <p class="btn btn-default btn-lg" style="font-size:160%; width:10%;border-radius: 15px; float:right;margin-top:1.3cm;">
+  <span class="glyphicon glyphicon-cog"></span>  Edit</p>
+    <% end %>
 <%end%>
 <%=  link_to organization_needs_path do %>
 <p class="btn btn-info btn-lg" style="font-size:160%;border-radius: 15px;margin-top:1.3cm;">
    <i class="fa fa-angle-left"></i> Other needs</p>
+  <% end %>
   <% end %>
   </div>
