@@ -28,7 +28,7 @@ Rails.application.routes.draw do
   end
   resources :organization_searches
   resources :searches
-  root 'organizations#index'
+  root 'organizations#homePage'
   get    '/signUp',   to: 'organizations#new'
   get    '/login',   to: 'sessions#new'
   post   '/login',   to: 'sessions#create'
