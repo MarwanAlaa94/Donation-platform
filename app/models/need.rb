@@ -15,7 +15,6 @@ class Need < ApplicationRecord
   validates :organization_id, presence: true
   validates :title, presence: true, length: {in: 5..40}
   validates :description, presence: true, length: {in: 40..700}
-  validates :start_date, presence:true
   validates :money, presence:true
   validates :urgent_rate, presence:true
 

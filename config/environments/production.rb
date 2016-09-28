@@ -91,6 +91,6 @@ Rails.application.configure do
   authentication: "plain",
   enable_starttls_auto: true,
   user_name: "DonationPlatformWebsite@gmail.com",
-  password: donation123
+  password: "donation123"
 }
 end
