@@ -73,7 +73,7 @@ class OrganizationsController < ApplicationController
   def deleteImage
     @image = OrgImage.find(params[:image_id])
     @image.destroy
-    
+
    # redirect_to editImages_path, notice: 'Image was deleted successfully.'
   end
 
@@ -141,7 +141,7 @@ class OrganizationsController < ApplicationController
     def logged_in_user
          unless logged_in? || admin_logged_in? || donor_logged_in?
            flash[:danger] = "Please log in."
-           redirect_to login_url
+           redirect_to donor_login_path
          end
        end
 

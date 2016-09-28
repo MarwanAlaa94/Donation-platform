@@ -8,7 +8,7 @@
   <% list=list.reverse %>
   <div class="container" >
     <div class="panel panel-primary">
-      <div class="panel-heading">
+      <div class="panel-heading" style="background-color:#279ddd;">
 
         <div class="row">
           <div class="col-lg-7">
@@ -18,12 +18,12 @@
           <%=Organization.all.where(id: list[0].org_id)[0].org_name%></h3>
           </div>
           <div class="col-lg-5">
-            <div class="btn-group" style="margin-top:0.3cm;">
-            <button  data-toggle="tab" href="#All<%=org_name%>" type="button" class="btn btn-primary">All
+            <div class="btn-group" style="margin-top:0.3cm;background-color:#279ddd;  ">
+            <button  data-toggle="tab" href="#All<%=org_name%>" type="button" class="btn btn-primary"style="background-color:#279ddd;  ">All
                <span class="badge" style="color:white; background:#4169E1;"><%=list.count%></span></button>
-            <button data-toggle="tab" href="#Recieved<%=org_name%>" type="button" class="btn btn-primary">Recieved
+            <button data-toggle="tab" href="#Recieved<%=org_name%>" type="button" class="btn btn-primary"style="background-color:#279ddd;  ">Recieved
              <span class="badge" style="color:white; background:#4169E1;"><%=list.select{ |item| item[:is_recieved] ==true }.count%></span></button>
-            <button data-toggle="tab" href="#NotRecieved<%=org_name%>" type="button" class="btn btn-primary">Not Recieved
+            <button data-toggle="tab" href="#NotRecieved<%=org_name%>" type="button" class="btn btn-primary" style="background-color:#279ddd;  ">Not Recieved
              <span class="badge" style="color:white; background:#4169E1;"><%=list.select{ |item| item[:is_recieved] ==false }.count%></span></button>
           </div>
           </div>

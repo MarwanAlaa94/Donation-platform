@@ -20,10 +20,6 @@
     <%= f.label :description %>
     <%= f.text_area :description ,class: 'form-control'%>
 
-    <%= f.label :start_date %>
-    <%= f.date_select :start_date ,class: 'form-control'%>
-
-
     <%= f.label :end_date %>
     <%= f.date_select :end_date ,class: 'form-control'%>
 
@@ -62,13 +58,13 @@
         <div id = "images">
           <div id="image">
             <%= builder.label :caption, "New Image Caption" %>
-            <%= builder.text_field :caption, :required => true,class: 'form-control' %>
+            <%= builder.text_field :caption,class: 'form-control' %>
             <%= builder.label :photo, "New Image File" %>
-            <%= builder.file_field :photo,class: 'form-control', :required => true %>
+            <%= builder.file_field :photo,class: 'form-control' %>
             <%#= link_to "Delete", :onclick => 'remove("image");' %>
           </div>
         </div>
-        <button type="button"class: "btn btn-primary" onclick="addNeedImageDiv(<%= counter %>);">Add Another Image</button> 
+        <button type="button"class: "btn btn-primary" onclick="addNeedImageDiv(<%= counter %>);">Add Another Image</button>
 
         <% end %>
         <% counter=counter+1 %>
