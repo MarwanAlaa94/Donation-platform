@@ -14,7 +14,7 @@
 
   <div class="row" id="hamada">
     <div class="col-md-6 col-md-offset-3">
-    <h1>Slider images</h1>
+    <h1>Official documents and Related images(png, jpg,..)</h1>
     <% counter=0 %>
     <%= f.fields_for :org_images do |builder| %>
         <% if counter != @organization.org_images.count %>
@@ -50,7 +50,7 @@
     <%= f.submit "Done", class: "btn btn-primary btn-lg" %>
     <% if !@organization.isApproved %>
     <%=  link_to root_path() do %>
-    <h5 >
+    <h5 style="text-align:center;">
           skip>></h5>
       <% end %>
     <% end %>
