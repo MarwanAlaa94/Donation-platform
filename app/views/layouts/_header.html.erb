@@ -67,9 +67,40 @@
               <li style="font-family: Lobster; font-size:140%;"> <%=  link_to current_user.user_name ,current_user%></li>
               <li style="font-family: Lobster; font-size:140%;"> <%= link_to "My payments",user_myKheir_path(user_id:current_user.id)%></li>
               <li class="dropdown">
+              
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                  <b class="glyphicon glyphicon-globe"></b>
+                </a>
+              <ul class="dropdown-menu scrollable-menu" role="menu">
+                <% notifications=current_user.notifications %>
+                <% notifications.each do |noti| %>
+                <li>
+                <% need= Need.find(noti.need_id)%>
+                <%= link_to  organization_need_path(noti.organization_id,need) do %>
+                    <% if noti.notification_type == 1 %>
+                        <%= "your \n Donation for  #{Organization.find(noti.organization_id).org_name}  organization for the need  #{need.title} was rejected because they are in no need for more donations" %><br> <%= need.title %>
+                    <% elsif noti.notification_type ==2 %>
+                       <%= "Your Donation for #{Organization.find(noti.organization_id).org_name} organization for the need  #{need.title} was received successfully"  %>
+                    
+                    <% elsif noti.notification_type ==3 %>
+                        <%= " #{Organization.find(noti.organization_id).org_name} organization has created a new need  #{need.title} " %> 
+                    <% end %>
+                <% end %>
+                </li>
+               <% end %>
+                
+                <li>
+                <%= link_to "See all Notifications", user_show_notifications_path(current_user) %>
+                </li>
+              </ul>
+              </li>
+              
+
+              <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                  <b class="caret"></b>
               </a>
+              
               <ul class="dropdown-menu">
                 <li><a href="/messages/new">Contact Us</a></li>
                 <li class="divider"></li>

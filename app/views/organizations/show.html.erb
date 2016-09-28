@@ -44,7 +44,13 @@
         <section class="user_info">
         <div id="band" class="container text-center">
           <h3><%= @organization.org_name %></h3>
+          <%#= @organization.followings.pluck(:user_id).to_a %>
           <p style="font-size:160%;"><em><%= @organization.info%></em></p>
+          <% if donor_logged_in? && !Following.exists?(user_id: current_user.id ,organization_id: @organization.id ) %>
+            <%= button_to 'follow organization', organization_create_following_path(@organization)%>
+            <% elsif donor_logged_in? && Following.exists?(user_id: current_user.id ,organization_id: @organization.id ) %>
+           <%= button_to 'unfollow organization', organization_destroy_following_path(@organization)%>
+           <% end %>
         </section>
       </div>
       </div>

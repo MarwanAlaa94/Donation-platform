@@ -1,21 +1,23 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:show, :edit, :update, :destroy ]
+  before_action :set_user, only: [:show, :edit, :update, :destroy]
   before_action :correct_donor_or_admin, only: [:show, :destroy]
   before_action :correct_donor, only: [ :edit, :update]
   before_action :logged_in_admin, only:[:index,:index_admins]
+
   # GET /users
   # GET /users.json
   def index
-    @users = User.all
+      @users = User.all
   end
 
   def index_admins
-    @admins = User.where(isAdmin:true)
+      @admins = User.where(isAdmin:true)
   end
   # GET /users/invite
   def invite_admin
-    @user = User.new
+      @user = User.new
   end
+
 
   #POST /users/invite
   def invite_new_admin
@@ -42,30 +44,49 @@ class UsersController < ApplicationController
   # GET /users/1
   # GET /users/1.json
   def show
+      @notifications =@current_user.notifications
   end
+
+  
+  def show_all_notifications
+     @user = User.find(params[:user_id])
+      if current_user?(@user)
+         @notifications =@user.notifications
+      else
+         redirect_to root_url
+      end
+  end
+  
   def showPayment
-    @user = User.find(params[:user_id])
-    @payments = @user.payments
+      @user = User.find(params[:user_id])
+      if current_user?(@user)
+         @payments = @user.payments
+      else
+         redirect_to root_url
+      end
   end
 
   def myKheir
-
-   @user = User.find(params[:user_id])
-    @payments = @user.payments
-    @payments1 = @payments.sort_by &:org_id
-    @lists=[]
-    @lists.append([])
-    i=0;j=0;
-    @payments1.each do |pay|
-        if j!=0
-          if @payments1[j].org_id!=@payments1[j-1].org_id
-            @lists.append([])
-            i+=1
+      @user = User.find(params[:user_id])
+      if current_user?(@user)
+          @payments = @user.payments
+          @payments1 = @payments.sort_by &:org_id
+          @lists=[]
+          @lists.append([])
+          i=0;j=0;
+          @payments1.each do |pay|
+              if j!=0
+                  if @payments1[j].org_id!=@payments1[j-1].org_id
+                    @lists.append([])
+                    i+=1
+                  end
+              end
+              @lists[i].append(@payments1[j])
+              j+=1
           end
-        end
-        @lists[i].append(@payments1[j])
-        j+=1
-    end
+      else
+      redirect_to root_url
+      end
   end
 
 
@@ -114,6 +135,7 @@ class UsersController < ApplicationController
   # DELETE /users/1
   # DELETE /users/1.json
   def destroy
+    Following.destroy_all(:user_id => @user.id)
     donor_log_out
     @user.destroy
     respond_to do |format|

@@ -1,11 +1,12 @@
 class User < ApplicationRecord
+  has_many :notifications, :dependent => :destroy
   has_many :payments
-    has_many :needs, through: :payments
-    accepts_nested_attributes_for :payments,
+  has_many :needs, through: :payments
+  has_many :followings, :dependent => :destroy
+  has_many :organizations, through: :followings
 
-             :allow_destroy => true
-    accepts_nested_attributes_for :needs
-
+  accepts_nested_attributes_for :payments,:allow_destroy => true
+  accepts_nested_attributes_for :needs
   mount_uploader :avatar, AvatarUploader
 
 

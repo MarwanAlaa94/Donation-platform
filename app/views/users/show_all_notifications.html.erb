@@ -1,0 +1,33 @@
+<h1> Notifications </h1>
+
+<div class="row center">
+    <% @notifications.each do |noti| %>
+       <div class="center col-lg-8 col-lg-offset-2  ">
+                   <em  style=" font-family: Sans-Serif;">
+                        <% if noti.notification_type == 1 %>
+                        <div class="well notificationWell1" >
+                        
+                            <% need= Need.find(noti.need_id)%>
+                           <h4><%= "Your Donation for #{Organization.find(noti.organization_id).org_name} organization for the need " %> <%=link_to need.title, organization_need_path(need.organization.id,need)  %> <%="was rejected because they are in no need for more donations" %></h4>
+                         </div>
+                         <% elsif noti.notification_type ==2 %>
+                              <div class="well notificationWell2" >
+                            <% need= Need.find(noti.need_id)%>
+                           <h4><%= "Your Donation for #{Organization.find(noti.organization_id).org_name} organization for the need " %> <%=link_to need.title, organization_need_path(need.organization.id,need)  %> <%="was received successfully"  %></h4>
+                         </div>
+                          <% elsif noti.notification_type ==3 %>
+                              <div class="well notificationWell2" >
+                            <% need= Need.find(noti.need_id)%>
+                           <h4><%= " #{Organization.find(noti.organization_id).org_name} organization has created a new need " %> <%=link_to need.title, organization_need_path(need.organization.id,need) %></h4>
+                         </div>
+                         <% end %>
+                         
+                  <br>
+       
+                    
+              <%#= end %>
+             
+              </em> 
+       </div>
+    <% end %>
+</div>

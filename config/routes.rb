@@ -3,28 +3,32 @@ Rails.application.routes.draw do
   get 'admin/home'
   resources :messages
   resources :organizations do
-    get '/needs/:id/addImage', to: 'needs#addImage', as: 'addImage'
-    resources :needs do
-    get 'donation' => 'needs#donate'
-    get 'needPayments' => 'needs#showPayments'
+      get '/needs/:id/addImage', to: 'needs#addImage', as: 'addImage'
+      post '/addFollower', to: 'followings#create', as: 'create_following'
+      post '/destroyFollower', to: 'followings#destroy', as: 'destroy_following'
+      resources :needs do
+          get 'donation' => 'needs#donate'
+          get 'needPayments' => 'needs#showPayments'
 
-    post    'recieve/:id' => 'needs#recieve' , as: 'recieve_pay'
-    post    'ignore/:id' => 'needs#ignore' , as: 'ignore_pay'
-    delete  'deleteImage/:image_id' => 'needs#deleteNeedImage' , as: 'delete_image'
-  end
-    collection do
-    get    'notApproved' => 'organizations#notApproved' , as: 'notApproved'
-    get    'homePage' => 'organizations#homePage' , as: 'homePage'
+          post    'recieve/:id' => 'needs#recieve' , as: 'recieve_pay'
+          post    'ignore/:id' => 'needs#ignore' , as: 'ignore_pay'
+          get    '/notifications' => 'notifications#create' , as: 'create_noti' #####
+          delete  'deleteImage/:image_id' => 'needs#deleteNeedImage' , as: 'delete_image'
+      end
+      collection do
+          get    'notApproved' => 'organizations#notApproved' , as: 'notApproved'
+          get    'homePage' => 'organizations#homePage' , as: 'homePage'
 
-    get    'showNotApproved/:id' => 'organizations#showNotApproved' , as: 'showNotApproved'
-    post    'approveOrg/:id' => 'organizations#approveOrg' , as: 'approveOrg'
-    delete  'disapproveOrg/:id' => 'organizations#disapproveOrg' , as: 'disapproveOrg'
-  end
-    get 'Achievements' => 'needs#indexAchivements'
+          get    'showNotApproved/:id' => 'organizations#showNotApproved' , as: 'showNotApproved'
+          post    'approveOrg/:id' => 'organizations#approveOrg' , as: 'approveOrg'
+          delete  'disapproveOrg/:id' => 'organizations#disapproveOrg' , as: 'disapproveOrg'
+       end
+       get 'Achievements' => 'needs#indexAchivements'
   end
   resources :users do
-  get '/showPayment' => 'users#showPayment'
-    get '/myKheir' => 'users#myKheir'
+      get '/showPayment' => 'users#showPayment'
+      get '/myKheir' => 'users#myKheir'
+      get    '/notifications' => 'users#show_all_notifications' , as: 'show_notifications' 
   end
   resources :organization_searches
   resources :searches

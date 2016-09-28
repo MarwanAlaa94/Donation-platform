@@ -2,6 +2,9 @@ class Organization < ApplicationRecord
 	has_secure_password
 		has_many :org_images, :dependent => :destroy
 		has_many :needs, :dependent => :destroy
+		has_many :followings, :dependent => :destroy
+		has_many :users, through: :followings
+
   	#validates_associated :photos
   	#validates_acceptance_of :terms_of_service , :acceptance => true
 		accepts_nested_attributes_for :org_images, reject_if: proc { |t| t['caption'].blank? }

@@ -10,7 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160926035055) do
+ActiveRecord::Schema.define(version: 20160928163333) do
+
+  create_table "followings", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "organization_id"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+  end
 
   create_table "messages", force: :cascade do |t|
     t.string   "name"
@@ -54,6 +61,17 @@ ActiveRecord::Schema.define(version: 20160926035055) do
     t.integer "user_id", null: false
     t.integer "need_id", null: false
     t.index ["user_id", "need_id"], name: "index_needs_users_on_user_id_and_need_id"
+  end
+
+  create_table "notifications", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "organization_id"
+    t.integer  "need_id"
+    t.integer  "payment_id"
+    t.boolean  "seen",              default: false
+    t.integer  "notification_type"
+    t.datetime "created_at",                        null: false
+    t.datetime "updated_at",                        null: false
   end
 
   create_table "org_images", force: :cascade do |t|
@@ -121,11 +139,12 @@ ActiveRecord::Schema.define(version: 20160926035055) do
     t.string   "user_name"
     t.string   "email"
     t.string   "password"
-    t.datetime "created_at",                      null: false
-    t.datetime "updated_at",                      null: false
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
     t.string   "password_digest"
     t.string   "avatar"
-    t.boolean  "isAdmin",         default: false
+    t.boolean  "isAdmin",             default: false
+    t.integer  "notifications_count", default: 0
   end
 
 end

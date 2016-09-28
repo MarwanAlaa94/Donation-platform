@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user_id: 1
+  organization_id: 1
+  need_id: 1
+  payment_id: 1
+  seen: false
+  notifiaction_type: 1
+
+two:
+  user_id: 1
+  organization_id: 1
+  need_id: 1
+  payment_id: 1
+  seen: false
+  notifiaction_type: 1

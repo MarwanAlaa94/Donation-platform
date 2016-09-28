@@ -1,5 +1,5 @@
 class NeedsController < ApplicationController
-  before_action :set_need, only: [:show, :edit,:addImage, :update, :destroy,:ignore]
+  before_action :set_need, only: [:show, :edit,:addImage, :update, :destroy,:ignore, :recieve]
    before_action :correct_user,   only: [:edit,:destroy,:showPayments]
 
   def index
@@ -29,6 +29,7 @@ class NeedsController < ApplicationController
   def new
     @organization = Organization.find(params[:organization_id])
     @need=@organization.needs.build
+   
   end
   def edit
       @need.need_images.build
@@ -57,26 +58,39 @@ class NeedsController < ApplicationController
 
       end
     @payment.need.save
+    user= User.find(@payment.user_id)
+    users = Array.new
+    users.push(@payment.user_id)
+    redirect_to organization_need_create_noti_path(:users =>users, :org_id => params[:organization_id], :need_id => @need.id, :pay_id => @payment.id, :noti_type => 2)
 
     #redirect_to organization_need_needPayments_path(need_id: @payment.need.id), notice: 'Payment has been recieved successfully'
   end
 
   def ignore
-   @payment = Payment.find(params[:payment_id])
-   user= User.find(@payment.user_id)
-   @need.send_payment_ignorance_mail(user,@payment)
-   @payment.destroy
-   #redirect_to organization_need_needPayments_path, notice: 'Payment has been ignored successfully'
+      @payment = Payment.find(params[:payment_id])
+      user= User.find(@payment.user_id)
+      users = Array.new
+      users.push(@payment.user_id)
+      redirect_to organization_need_create_noti_path(:users =>users, :org_id => params[:organization_id], :need_id => @need.id, :pay_id => @payment.id, :noti_type => 1) 
+      @need.send_payment_ignorance_mail(user,@payment)
+     # @payment.destroy
+      #redirect_to organization_need_needPayments_path, notice: 'Payment has been ignored successfully'
  end
 
   def create
     @organization = Organization.find(params[:organization_id])
     @need = @organization.needs.create(need_params)
       if @organization.save
-          redirect_to  organization_needs_path+"/"+@need.id.to_s+"/addImage"
-        else
+          followers=Array.new
+          followers= @organization.followings.pluck(:user_id) 
+          if followers.any?
+            redirect_to organization_need_create_noti_path(:users =>followers, :org_id => params[:organization_id], :need_id => @need.id, :pay_id => ' ', :noti_type => 3) 
+          else
+            redirect_to  organization_needs_path+"/"+@need.id.to_s+"/addImage"
+          end
+      else
          render :new
-  end
+    end
 end
 
 
@@ -95,6 +109,7 @@ end
 
 
   def destroy
+    Notification.destroy_all(:organization_id => @need.organization.id)
     @need.destroy
     respond_to do |format|
       format.html { redirect_to organization_needs_path, notice: 'Need was successfully destroyed.' }

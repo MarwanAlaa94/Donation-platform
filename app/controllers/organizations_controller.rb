@@ -1,6 +1,6 @@
 class OrganizationsController < ApplicationController
   before_action :set_organization, only: [:show,:editAndaddImages ,:edit, :update, :destroy]
-  before_action :logged_in_user, only: [:edit,:show]
+  before_action :logged_in_user, only: [:edit,:show, :add_follower]
   before_action :correct_user_org,   only: [:edit]
   before_action :correct_user_or_admin,   only: [:destroy]
 
@@ -36,6 +36,13 @@ class OrganizationsController < ApplicationController
         format.json { render json: @organization.errors, status: :unprocessable_entity }
       end
     end
+
+  end
+  def add_follower #####
+    user=current_user
+    skhkhfk.hjhj
+    redirect_to organization_create_following_path(:user => user, :org_id => params[:id])
+
 
   end
   def disapproveOrg
@@ -118,6 +125,8 @@ class OrganizationsController < ApplicationController
   # DELETE /organizations/1
   # DELETE /organizations/1.json
   def destroy
+    Notification.destroy_all(:organization_id => @organization.id)
+    Following.destroy_all(:organization_id => @organization.id)
     log_out
     @organization.destroy
     respond_to do |format|
