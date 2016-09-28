@@ -1,8 +1,76 @@
+<div class="container-fluid hamada row">
+
+  <div  class="col-lg-12" >
+
+        <div
+        style="background-image: url(<%= asset_path 'hands6.jpg' %>);
+        background-repeat: no-repeat;
+        ;height: 12cm " >
+      <div class="row">
+        <div class="col-lg-1">
+        </div>
+
+        <div class="col-lg-5" >
+          <div style="background-color :#ffffff">
+            <p style="text-align:center ; margin-top:2cm">
+                <a href="#about">
+                <div class="well well-lg"><h3>Donation platform</h3><br> .
+
+                Why do we use it?
+                It is a long established fact that a reader will be distracted
+                by the readable content of a page when looking at its layout.
+                The point of using Lorem Ipsum is that it has a more-or-less
+                normal distribution of letters, as opposed to using 'Content here,
+                content here', making it look like readable
+                English. Many desktop publishing packages and web page
+                editors now use Lorem Ipsum as their default model text,
+                 and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).
+
+                </div>
+                </a>
+            </p>
+          </div>
+        </div>
 
 
- <div style="height:120px; width:120px; padding:9px; background:url
- (../../assets/images/hand.jpg) no-repeat red">
- <p>
-   blablabla
- </p>
+        <div class="col-lg-6">
+          <div  class="row">
+            <div class="col-lg-6">
+              <%= link_to donor_register_path do %>
+              <p class="btn btn-default btn-lg" style="font-size:160%;
+              width:75%;border-radius: 15px; margin-top:9cm ">
+              Sign up
+                <%end%>
+            </div>
+
+            <div class="col-lg-6">
+              <%= link_to organizations_path do %>
+              <p class="btn btn-default btn-lg" style="font-size:160%;
+              width:75%;border-radius: 15px; margin-top:9cm ">
+            Organizations
+                <%end%>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id"about" class="container-fluid bg-grey">
+  <div class="row">
+    <div class="col-sm-8">
+      <h3><b>Donation Platform</b></h3>
+
+      <p>.
+
+Why do we use it?
+It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).
+.</p>
+
+    </div>
+    <div class="col-sm-4">
+      <span class="glyphicon glyphicon-signal logo"></span>
+    </div>
+  </div>
 </div>
