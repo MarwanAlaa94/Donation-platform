@@ -45,8 +45,18 @@ class UsersController < ApplicationController
   end
   def showPayment
     @user = User.find(params[:user_id])
+    redirect_to(root_path) if !current_user?(@user)
     @payments = @user.payments
   end
+
+    def show_all_notifications
+      @user = User.find(params[:user_id])
+        if current_user?(@user)
+          @notifications =@user.notifications
+        else
+          redirect_to root_url
+        end
+    end
 
   def myKheir
     @user = User.find(params[:user_id])
@@ -115,6 +125,7 @@ class UsersController < ApplicationController
   # DELETE /users/1
   # DELETE /users/1.json
   def destroy
+    Following.destroy_all(:user_id => @user.id)
     donor_log_out
     @user.destroy
     respond_to do |format|

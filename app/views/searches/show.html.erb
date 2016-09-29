@@ -1,43 +1,129 @@
-<h1> Organzations </h1>
+<h1 style="text-shadow: blue -1px -2px 0.5em; ">Organizations</h1>
 
+<div class="container">
+<div class="row">
 <% if @search.search_organizations.empty? %>
 	<p> No organizations Found </p>
 <% else %>
-	<% @search.search_organizations.each do |org| %>
-		<%= link_to org do %>
-		<div class="organization_temp">
-			<br>
-			<% if org.image_file_name? %> 
-				<h1><%= image_tag   org.image.url(:medium)%></h1>
-			<% end %>
-        	<h3> <strong>Organization Name: </strong><%= org.org_name %></h3>
-       		<h4><strong> Website: </strong> <%= org.website_URL%></h4>
-      	</div>
-	  	<% end %>
+	<% @search.search_organizations.each do |organization| %>
+		
+
+        <div class="col-lg-2">
+        </div>
+        <div class="col-lg-12">
+        <%= link_to organization do %>
+        <div class="  alert alert-success" style="height:200px">
+          <div class="row" style = "max-height:180px ;overflow-y: scroll; ">
+
+            <div class="col-lg-2  ">
+              <% if organization.image.exists? %>
+                <%= image_tag   organization.image.url(:thumb),
+                :class =>" img-circle fancybox"%>
+              <% else %>
+                <img class=" img-circle fancybox" src="/missing.png" width="100%" height="100%" alt="Missing">
+              <% end %>
+            </div>
+
+
+          <div class="col-lg-10 "style = "text-align:center; " >
+          <strong>
+          <em  style=" font-family: Sans-Serif;"> <%= organization.org_name %></em><br>
+          </strong>
+          <strong>Email:</strong>
+          <em  style=" font-family: Sans-Serif;">  <%= organization.email%></em><br>
+          <strong>Website:</strong>
+          <em  style=" font-family: Sans-Serif;">  <%= organization.website_URL%></em><br>
+          <strong>Information:</strong><br>
+          <em  style=" font-family: Sans-Serif;">  <%= organization.info%></em>
+
+
+        </div>
+
+          </div>
+          </div>
+          <%end%>
+        </div>
+<div class="col-lg-2">
+        </div>
+
+
 	<% end %>
 <% end %>
+</div></div>
+
+
+..
+
+<h1 style="text-shadow: blue -1px -2px 0.5em; ">Needs</h1>
 
 
 
-
-<h1> Needs </h1>
+<div class="container">
+    <div class="row">
 <% if @search.search_needs.empty? %>
 	<p> No needs Found </p>
 <% else %>
-	<% @search.search_needs.each do |need| %>
-		<%= link_to organization_need_path(need.organization.id,need) do %>
-		<div class="organization_temp">
-        	<h3><strong>Title:</strong> <%= need.title %></h3>
-       		<h4><strong>description:</strong><%= need.description%></h4>
-      	</div>
-	  	<% end %>	
-	<% end %>
+<% @search.search_needs.each do |need| %>
+
+      <div class="col-sm-4">
+        <%= link_to organization_need_path(need.organization.id,need) do %>
+        <div class="panel panel-primary">
+            <div class="panel-heading" style="align-text:center;"><%=need.title%></div>
+              <div class="panel-body img-responsive" style="width:100% ;  height:8.5cm;" >
+                <% if need.need_images.present? %>
+                    <%= image_tag  need.need_images[0].photo.url(:medium) ,
+                    :class =>"img-responsive img-rounded fancybox" ,:style => "width:100%; height: 150px ;" %>
+                    <%else%>
+                    <%= image_tag("missing.png", :alt => "Empty image",
+                     :class =>"img-responsive img-rounded" ,:style => "width:100% ; height: 120px ; ") %>
+                <%end%>
+                <br>
+
+                <div style="text-align:center">
+                  <% percent= need.donated_money*100/need.money%>
+
+                  <div class="progress">
+
+                    <div class="progress-bar progress-bar-default progress-bar-striped active" role="progressbar" aria-valuenow="<%= percent %>" aria-valuemin="0" aria-valuemax="100" style="width:<%= percent %>%">
+                      <%= percent %>% collected
+                    </div>
+                  </div>
+                  <% if need.payments.select{ |item| item[:is_recieved] ==false }.count!=0 %>
+                  <span class="badge" style="color:white; background:#5D6970; border-radius:10mm;"> new payments: <%=need.payments.select{ |item| item[:is_recieved] ==false }.count%></span>
+                </p>
+                  <%end%>
+                  <%if need.description.length < 80%>
+                  <%=need.description%>
+                  <%else%>
+                    <%=need.description[0..80]+ '...'%>
+                  <%end%>
+
+                </div>
+
+          </div>
+        </div>
+        <%end%>
+      </div>
+
 <% end %>
+</div>
+</div>
+
+
+
+<p class="btn btn-info btn-lg" style="font-size:160%;border-radius: 15px;margin-top:1.3cm;">
+   <i class="fa fa-angle-left"></i> Back</p>
+  <% end %>
+
+
+
+<!-- ##### -->
 
 
 
 <% if logged_in? %>
-	<h1> Users </h1>
+<h1 style="text-shadow: blue -1px -2px 0.5em; ">Users</h1>
+
 
 	<% if @search.search_users.empty? %>
 		<p> No Users Found </p>
