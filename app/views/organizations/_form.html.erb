@@ -14,47 +14,47 @@
   <div class="row">
     <div class="col-md-6 col-md-offset-3">
 
-    <%= f.label :org_name %>
+    <%= f.label :org_name, "Organization Name: *" %>
     <%= f.text_field :org_name , :autocomplete => 'off',class: 'form-control'  %>
 
 
 
-    <%= f.label :email %>
+    <%= f.label :email , "organization Email: *"%>
     <%= f.email_field :email , :autocomplete => 'off',class: 'form-control' %>
 
 
 
-      <%= f.label :password %>
+      <%= f.label :password, "Password: *" %>
         <%= f.password_field :password , :autocomplete => 'off',class: 'form-control' %>
 
 
 
-      <%= f.label :password_confirmation %>
+      <%= f.label :password_confirmation, "Password Confirmation: *" %>
         <%= f.password_field :password_confirmation , :autocomplete => 'off',class: 'form-control'%>
 
 
 
-    <%= f.label :info %>
+    <%= f.label :info, "Information about organization: *" %>
     <%= f.text_area :info , :autocomplete => 'off',class: 'form-control'%>
 
 
 
-    <%= f.label :website_URL %>
+    <%= f.label :website_URL, "Website Url (if exists):" %>
     <%= f.text_field :website_URL , :autocomplete => 'off',class: 'form-control' %>
 
 
 
-    <%= f.label :contacts %>
+    <%= f.label :contacts, "Contacts: *" %>
     <%= f.text_field :contacts , :autocomplete => 'off',class: 'form-control' %>
 
 
 
-    <%= f.label :logo_url %>
+    <%= f.label :logo_url, "Logo Url (if exists):" %>
     <%= f.text_field :logo_url,class: 'form-control' %>
 
 
 
-    <%=f.label "Profile Image"%><br>
+    <%=f.label "Profile Image:"%><br>
     <%=f.file_field :image ,class: 'form-control'%>
 
     </div>

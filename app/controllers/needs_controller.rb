@@ -74,7 +74,7 @@ class NeedsController < ApplicationController
     @organization = Organization.find(params[:organization_id])
     @need = @organization.needs.create(need_params)
       if @organization.save
-          redirect_to  organization_needs_path+"/"+@need.id.to_s+"/addImage"
+          redirect_to  organization_needs_path, notice: 'Need was successfully created.'
         else
          render :new
   end
