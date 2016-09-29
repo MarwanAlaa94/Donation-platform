@@ -18,6 +18,23 @@ $gray-medium-light: #eaeaea;
   }
 }
 
+.dropdown-menu-Notifications{
+  max-width: 300px;
+  display:block;
+  
+}
+.notificationWell1{
+  background-color: rgb(205,234,251);
+}
+.notificationWell2{
+  background-color: rgb(249,230,139);
+}
+.scrollable-menu { 
+    height: auto;
+    max-height: 300px; /* ##### hatb2a we7sha 3nd Marwan ! :/ */
+    
+    overflow-x: hidden;
+}
 
 section {
   overflow: auto;
