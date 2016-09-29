@@ -29,6 +29,7 @@ class NeedsController < ApplicationController
   def new
     @organization = Organization.find(params[:organization_id])
     @need=@organization.needs.build
+    @need.need_images.build
   end
   def edit
       @need.need_images.build

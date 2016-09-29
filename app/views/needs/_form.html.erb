@@ -14,29 +14,29 @@
   	<div class="col-md-6 col-md-offset-3">
 
 
-    <%= f.label :title %>
+    <%= f.label :title,"Need/Achievement Title: *" %>
     <%= f.text_field :title ,class: 'form-control'%>
 
-    <%= f.label :description %>
+    <%= f.label :description, "Need/Achievement Description: *" %>
     <%= f.text_area :description ,class: 'form-control'%>
 
-    <%= f.label :end_date %>
+    <%= f.label :end_date, "End Date: *" %>
     <%= f.date_select :end_date ,class: 'form-control'%>
 
     <% if need.money == nil %>
-      <%= f.label :money %>
-      <%= f.text_field :money,class: 'form-control' %>
+      <%= f.label :money, "Money Needed or Money Collected: *"%>
+      <%= f.number_field :money,min: 1, class: 'form-control' %>
       <br>
       <% end %>
-    <%= f.label :urgent_rate %>
-    <%= f.number_field :urgent_rate ,class: 'form-control'  %>
+    <%= f.label :urgent_rate, "Urgent Rate (from 1 to 5): *" %>
+    <%= f.number_field :urgent_rate ,min: 1,max: 5,class: 'form-control'  %>
 
-    <h5 style="display:inline-block;"><%= f.label :in_progress %> </h5>
+    <h5 style="display:inline-block;"><%= f.label :in_progress ,"In Progress?"%> </h5>
     <h5 style="display:inline-block;">
     <%= f.check_box :in_progress, :style => "width: 110px; height: 50px;" %>
     </h5>
 
-    <h5 style="display:inline-block;"><%= f.label :achievment_flag %> </h5>
+    <h5 style="display:inline-block;"><%= f.label :achievment_flag, "Achivement?" %> </h5>
     <h5 style="display:inline-block;">
     <%= f.check_box :achievment_flag, :style => "width: 50px; height: 50px;" %>
     </h5>
