@@ -87,7 +87,7 @@ class NeedsController < ApplicationController
             if followers.any?
               redirect_to organization_need_create_noti_path(:users =>followers, :org_id => params[:organization_id], :need_id => @need.id, :pay_id => ' ', :noti_type => 3) 
             else
-              redirect_to  organization_needs_path+"/"+@need.id.to_s+"/addImage"
+              redirect_to  organization_needs_path, notice: 'Need was successfully created.'
             end
       else
           render :new
