@@ -70,3 +70,7 @@ function removeAndAlert(id, message) {
 	el.parentNode.removeChild( el );
 	alert(message);
 }
+function follow(){
+	var fo = document.getElementById("follow");
+	fo.setValue("Unfolloe");
+}

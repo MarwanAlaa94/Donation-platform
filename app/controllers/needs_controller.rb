@@ -61,7 +61,7 @@ class NeedsController < ApplicationController
     user= User.find(@payment.user_id)
     users = Array.new
     users.push(@payment.user_id)
-    redirect_to organization_need_create_noti_path(:users =>users, :org_id => params[:organization_id], :need_id => @need.id, :pay_id => @payment.id, :noti_type => 2)
+    organization_need_create_noti_path(:users =>users, :org_id => params[:organization_id], :need_id => @need.id, :pay_id => @payment.id, :noti_type => 2)
 
     #redirect_to organization_need_needPayments_path(need_id: @payment.need.id), notice: 'Payment has been recieved successfully'
   end
@@ -72,9 +72,9 @@ class NeedsController < ApplicationController
       users = Array.new
       users.push(@payment.user_id)
       @need.send_payment_ignorance_mail(user,@payment)
-    
+    @payment.destroy
       redirect_to organization_need_create_noti_path(:users =>users, :org_id => params[:organization_id], :need_id => @need.id, :pay_id => @payment.id, :noti_type => 1) 
-      @payment.destroy
+      
      #redirect_to organization_need_needPayments_path, notice: 'Payment has been ignored successfully'
  end
 

@@ -17,12 +17,13 @@ class NotificationsController < ApplicationController
             user= User.find(user_id)
             User.where(:id => user_id).update_all(:notifications_count => user.notifications_count+1)
         end 
+    
         if params[:noti_type]==1.to_s
             redirect_to organization_need_needPayments_path, notice: 'Payment was ignored successfully'
         elsif params[:noti_type]==2.to_s
             redirect_to organization_need_needPayments_path, notice: 'Payment has been recieved successfully'
         elsif params[:noti_type]==3.to_s
-        redirect_to  organization_needs_path+"/"+params[:need_id]+"/addImage"
+            redirect_to  organization_needs_path, notice: 'Need was successfully created.'
         else
             redirect_to root_path
         end
