@@ -13,7 +13,7 @@
             <% end %>
           <% elsif logged_in? %>
             <% if @current_organization.image? %>
-              <%= image_tag @current_user.image.url(),class: "img-responsive"%>
+              <%= image_tag @current_organization.image.url(),class: "img-responsive"%>
             <% else %>
               <img src="/user_missing.png" class="img-responsive" alt="Missing">
             <% end %>
